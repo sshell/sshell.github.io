@@ -4,7 +4,7 @@ title: "rgbCTF 2020 Writeups"
 categories: ctf
 ---
 
-[Alien Transmission 1](#section-1)
+#[Alien Transmission 1](#alien-transmission-1)
 
 {:refdef: style="text-align: center;"}
 ![Alien Transmission Challenge Text](https://i.imgur.com/EIH4MFK.png){: .imgCenter}
