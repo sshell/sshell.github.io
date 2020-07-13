@@ -3,7 +3,7 @@ title: sshellblog
 tagline: 'security things and security stuff'
 url: https://sshell.co
 paginate: 1
-baseurl: ""
+baseurl: "/"
 
 
 # Gems
