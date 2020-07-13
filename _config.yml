@@ -36,6 +36,8 @@ author:
   name: sshell
   url: https://twitter.com/sshell_
   #email: sshell_
+  
+paginate: 5
 
 # Custom vars
 version: 3.0.0
