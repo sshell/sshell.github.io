@@ -1,9 +1,9 @@
 permalink: pretty
 title: sshellblog
 tagline: security things and security stuff
-url: http://sshell.co
+url: "https://sshell.co"
 paginate: 1
-baseurl: "http://sshell.co/"
+baseurl: "https://sshell.co/"
 
 
 # Gems
