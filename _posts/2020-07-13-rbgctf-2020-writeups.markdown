@@ -185,7 +185,7 @@ Straight out of the gate, this looks like a pretty neat little game.  You can't 
 {: refdef}
 
 {:refdef: style="text-align: center;"}
-![obfuscated javascript](https://i.imgur.com/GPGGAdx.png){: .imgCenter}
+![obfuscated javascript](https://i.imgur.com/ug05QDS.png){: .imgCenter}
 {: refdef}
 
 The way Firefox Developer Tools were designed actually makes this challenge an absolute breeze. When you start typing a variable name in the javascript console, it not only brings up a list of variables, but also shows the value of whichever one you highlight. Since the obfuscation renames variables in the format of `_0xFFFFFF`, we can easily find the variables corresponding with our input textbox and the target string. 
