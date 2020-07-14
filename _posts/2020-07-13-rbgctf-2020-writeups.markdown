@@ -145,4 +145,28 @@ We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:g
 ## Typeracer {#typeracer}
 ####  Category: Web | Solves: 184 | Points: 119
 
-Coming Soon
+{:refdef: style="text-align: center;"}
+![Typeracer challenge description](https://i.imgur.com/nPMIccf.png){: .imgCenter}
+{: refdef}
+
+Straight out of the gate, this looks like a pretty neat little game.  You can't just copy and paste the sample text because in the page source, each word is generated out of order, in a different span, and on a different layer. You could try to de-obfuscate and try to figure out the javascript that renders that whole mess, but what a pain in the ass that would be.
+
+{:refdef: style="text-align: center;"}
+![Typeracer web app](https://i.imgur.com/odLfFQE.png){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+![obfuscated javascript](https://i.imgur.com/GPGGAdx.png){: .imgCenter}
+{: refdef}
+
+The way Firefox Developer Tools were designed actually makes this challenge an absolute breeze. When you start typing a variable name in the javascript console, it not only brings up a list of variables, but also shows the value of whichever one you highlight. Since the obfuscation renames variables in the format of `_0xFFFFFF`, we can easily find the variables corresponding with our input textbox and the target string. 
+
+To solve the challenge from here, we simply type `_0x318f00 = _0x35179f` into the console and hit enter and we're given the base64-encoded flag.
+
+{:refdef: style="text-align: center;"}
+![Firefox Developer Tools Javascript console](https://i.imgur.com/QeVTADL.png){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+![the base64 encoded flag](https://i.imgur.com/LUI3KWa.png){: .imgCenter}
+{: refdef}
