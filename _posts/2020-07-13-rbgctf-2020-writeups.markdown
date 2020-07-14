@@ -162,12 +162,12 @@ It's also worth noting that this challenge could have just as easily been solved
 
 ----------------
 
+{:refdef: style="text-align: center;"}
 ## Alien Transmission 1 {#alien-transmission-1}
 #### Category: Forensics/OSINT | Solves: 158 | Points: 219
 
 ----------------
 
-{:refdef: style="text-align: center;"}
 ![Alien Transmission Challenge Text](https://i.imgur.com/EIH4MFK.png){: .imgCenter}
 {: refdef}
 
