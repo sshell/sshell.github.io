@@ -164,6 +164,7 @@ It's also worth noting that this challenge could have just as easily been solved
 
 
 ## Alien Transmission 1 {#alien-transmission-1}
+{: style="text-align: center"}
 #### Category: Forensics/OSINT | Solves: 158 | Points: 219
 {: style="text-align: center"}
 
