@@ -53,7 +53,7 @@ So what is immediately obvious is that this is not a standard game (I mean your 
 ![Challenge text](https://i.imgur.com/TGz3N9X.png){: .imgCenter}
 {: refdef}
 
-I have to admit that at first I couldn't quite wrap my head around this one, but but the bit about breaking into Reddit's server reminded me of a funny easter egg someone had sent me before.
+I have to admit that at first I couldn't quite wrap my head around this one, but the bit about breaking into Reddit's server reminded me of a funny easter egg someone had sent me before.
 
 {:refdef: style="text-align: center;"}
 ![reddit easter egg](https://i.imgur.com/n7Fe1SN.png){: .imgCenter}
