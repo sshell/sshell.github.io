@@ -5,7 +5,7 @@ categories: ctf
 ---
 
 ## Alien Transmission 1 {#alien-transmission-1}
-### Category: Forensics/OSINT | Solves: 30 | Points: 219
+#### Category: Forensics/OSINT | Solves: 158 | Points: 219
 
 {:refdef: style="text-align: center;"}
 ![Alien Transmission Challenge Text](https://i.imgur.com/EIH4MFK.png){: .imgCenter}
@@ -28,7 +28,7 @@ Often times programs that pull data from audio involve complex setups with virtu
 {: refdef}
 
 ## Adventure {#adventure}
-### Category: Misc | Solves: 21 | Points: 495
+#### Category: Misc | Solves: 21 | Points: 495
 
 {:refdef: style="text-align: center;"}
 ![Adventure challenge description](https://i.imgur.com/jHrTIPk.png){: .imgCenter}
@@ -46,4 +46,27 @@ So what is immediately obvious is that this is not a standard game (I mean your 
 ![The flag](https://i.imgur.com/Q3n00SO.png){: .imgCenter}
 {: refdef}
 
+## Robin's Reddit Password {#robins-reddit-password}
+####  Category: Forensics/OSINT | Solves: 30 | Points: 490
 
+{:refdef: style="text-align: center;"}
+![Challenge text](https://i.imgur.com/TGz3N9X.png){: .imgCenter}
+{: refdef}
+
+I have to admit that at first I couldn't quite wrap my head around this one, but but the bit about breaking into Reddit's server reminded me of a funny easter egg someone had sent me before.
+
+{:refdef: style="text-align: center;"}
+![reddit easter egg](https://i.imgur.com/n7Fe1SN.png){: .imgCenter}
+{: refdef}
+
+Sure enough, one of the users here is Robin.  We google the hash and find out that someone has already cracked the hashes for us (thank you, stranger) so we can just wrap it in the flag format and submit it!
+
+{:refdef: style="text-align: center;"}
+![reddit hashes crakced](https://i.imgur.com/TZF5DWe.png){: .imgCenter}
+{: refdef}
+
+It's also worth noting that this challenge could have just as easily been solved with one Google search as well.
+
+{:refdef: style="text-align: center;"}
+![](https://i.imgur.com/KxCvY13.png){: .imgCenter}
+{: refdef}
