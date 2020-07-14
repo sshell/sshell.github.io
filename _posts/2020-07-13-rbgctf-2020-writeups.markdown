@@ -9,6 +9,7 @@ categories: ctf
 | Challenge Name | Category | Solves | Points |
 |:--------------:|:--------:|:------:|:------:|
 |[Adventure](#adventure) | Misc | 21 | 495|
+|[Picking Up The Pieces](#picking-up-the-pieces) | Misc | 93 | 403|
 |[PI 1: Magic in the Air](#magic-in-the-air) | Forensics/OSINT | 52 | 470 |
 |[PI 2: A Series of Tubes](#a-series-of-tubes) | Forensics/OSINT | 22 | 495 |
 |[Robin's Reddit Password](#robins-reddit-password) | Forensics/OSINT | 30 | 490 |
@@ -253,3 +254,67 @@ To solve the challenge from here, all we have to do is type `_0x318f00 = _0x3517
 [--- Back to Top ---](#intro)
 {: refdef}
 
+----------------
+
+## Picking Up The Pieces {#picking-up-the-pieces}
+{: style="text-align: center"}
+####  Category: Misc | Solves: 93 | Points: 403
+{: style="text-align: center"}
+
+----------------
+
+{:refdef: style="text-align: center;"}
+![Challenge description](https://i.imgur.com/Fj5d8oI.png){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+![Sample path data](https://i.imgur.com/qjGVq1c.png){: .imgCenter}
+{: refdef}
+
+{% highlight go linenos %}
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+	"strconv"
+	"strings"
+
+	"github.com/RyanCarrier/dijkstra"
+)
+
+func main() {
+	// initialize the map and 200,000 numbered points
+	graph := dijkstra.NewGraph()
+
+	for i := 1; i < 200001; i++ {
+		graph.AddVertex(i)
+	}
+
+	// open file with path data
+	file, _ := os.Open("map.txt")
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		x := scanner.Text()
+		y := strings.Split(x, " ")
+		// convert strings to int
+		z1, _ := strconv.Atoi(y[0])
+		z2, _ := strconv.Atoi(y[1])
+		z3, _ := strconv.Atoi(y[2])
+		// routes needs to be added both ways
+		graph.AddArc(z1, z2, int64(z3))
+		graph.AddArc(z2, z1, int64(z3))
+	}
+
+	// find and print the best path
+	best, err := graph.Shortest(1, 200000)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(best.Path)
+
+}
+
+{% endhighlight %}
