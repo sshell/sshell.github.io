@@ -49,6 +49,95 @@ So what is immediately obvious is that this is not a standard game (I mean your 
 
 ----------------
 
+## Picking Up The Pieces {#picking-up-the-pieces}
+{: style="text-align: center"}
+####  Category: Misc | Solves: 93 | Points: 403
+{: style="text-align: center"}
+
+----------------
+
+{:refdef: style="text-align: center;"}
+![Challenge description](https://i.imgur.com/Fj5d8oI.png){: .imgCenter}
+{: refdef}
+
+Boy oh boy, it's a pathfinding puzzle! Usually when someone wants to find the most efficient path between two points, they're going to want to use Dijikstra's Algorithm. It's the algorithm at the heart of Waze, Google Maps, and countless other applications, so you know it has to be good. 
+
+If you want learn to more about it, [check out this great video by Computerphile](https://www.youtube.com/watch?v=GazC3A4OQTE).
+
+{:refdef: style="text-align: center;"}
+![Sample path data](https://i.imgur.com/qjGVq1c.png){: .imgCenter}
+{: refdef}
+
+We start off by opening `map.txt` to see what we're working with, and it appears to be fairly standard stuff outside of the strings at the end. The first two numbers are the intersections that are connected and the third number is the distance between the two. Luckily Dijkstra's algorithm is popular enough to have thousands of libraries/packages/code snippets to reference.  We still have to write code of course, but [RyanCarrier/dijkstra](https://github.com/RyanCarrier/dijkstra) does the real heavy lifting here.
+
+{% highlight go %}
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"log"
+	"os"
+	"strconv"
+	"strings"
+
+	"github.com/RyanCarrier/dijkstra"
+)
+
+func main() {
+	// initialize the map and 200,000 numbered points
+	graph := dijkstra.NewGraph()
+
+	for i := 1; i < 200001; i++ {
+		graph.AddVertex(i)
+	}
+
+	// open file with path data
+	file, _ := os.Open("map.txt")
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		x := scanner.Text()
+		y := strings.Split(x, " ")
+		// convert strings to int
+		z1, _ := strconv.Atoi(y[0])
+		z2, _ := strconv.Atoi(y[1])
+		z3, _ := strconv.Atoi(y[2])
+		// routes needs to be added both ways
+		graph.AddArc(z1, z2, int64(z3))
+		graph.AddArc(z2, z1, int64(z3))
+	}
+
+	// find and print the best path
+	best, err := graph.Shortest(1, 200000)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(best.Path)
+
+}
+
+{% endhighlight %}
+
+{:refdef: style="text-align: center;"}
+![Sample path data](https://i.imgur.com/FDOl7vI.png){: .imgCenter}
+{: refdef}
+
+We run our code and it spits out the optimal path, just as we hoped. All that's left is to write a quick one-liner to spit out the relevant lines and we're done!
+
+The flag is : `rgbCTF{1m_b4d_4t_sh0pping}`
+
+{:refdef: style="text-align: center;"}
+![Sample path data](https://i.imgur.com/WQiP9NQ.png){: .imgCenter}
+{: refdef}
+
+----------------
+
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
+
+----------------
+
 ## PI 1: Magic in the Air {#magic-in-the-air}
 {: style="text-align: center"}
 ####  Category: Forensics/OSINT | Solves: 52 | Points: 470
@@ -255,66 +344,3 @@ To solve the challenge from here, all we have to do is type `_0x318f00 = _0x3517
 {: refdef}
 
 ----------------
-
-## Picking Up The Pieces {#picking-up-the-pieces}
-{: style="text-align: center"}
-####  Category: Misc | Solves: 93 | Points: 403
-{: style="text-align: center"}
-
-----------------
-
-{:refdef: style="text-align: center;"}
-![Challenge description](https://i.imgur.com/Fj5d8oI.png){: .imgCenter}
-{: refdef}
-
-{:refdef: style="text-align: center;"}
-![Sample path data](https://i.imgur.com/qjGVq1c.png){: .imgCenter}
-{: refdef}
-
-{% highlight go %}
-package main
-
-import (
-	"bufio"
-	"fmt"
-	"log"
-	"os"
-	"strconv"
-	"strings"
-
-	"github.com/RyanCarrier/dijkstra"
-)
-
-func main() {
-	// initialize the map and 200,000 numbered points
-	graph := dijkstra.NewGraph()
-
-	for i := 1; i < 200001; i++ {
-		graph.AddVertex(i)
-	}
-
-	// open file with path data
-	file, _ := os.Open("map.txt")
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		x := scanner.Text()
-		y := strings.Split(x, " ")
-		// convert strings to int
-		z1, _ := strconv.Atoi(y[0])
-		z2, _ := strconv.Atoi(y[1])
-		z3, _ := strconv.Atoi(y[2])
-		// routes needs to be added both ways
-		graph.AddArc(z1, z2, int64(z3))
-		graph.AddArc(z2, z1, int64(z3))
-	}
-
-	// find and print the best path
-	best, err := graph.Shortest(1, 200000)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(best.Path)
-
-}
-
-{% endhighlight %}
