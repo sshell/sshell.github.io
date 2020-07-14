@@ -38,7 +38,9 @@ Often times programs that pull data from audio involve complex setups with virtu
 ![The Flag](https://i.imgur.com/fDnVkar.png){: .imgCenter}
 {: refdef}
 
-[--- Back to Top ---](#intro){: .imgCenter}
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
 
 ## Adventure {#adventure}
 #### Category: Misc | Solves: 21 | Points: 495
@@ -59,7 +61,9 @@ So what is immediately obvious is that this is not a standard game (I mean your 
 ![The flag](https://i.imgur.com/Q3n00SO.png){: .imgCenter}
 {: refdef}
 
-[--- Back to Top ---](#intro){: .imgCenter}
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
 
 ## Robin's Reddit Password {#robins-reddit-password}
 ####  Category: Forensics/OSINT | Solves: 30 | Points: 490
@@ -86,7 +90,9 @@ It's also worth noting that this challenge could have just as easily been solved
 ![](https://i.imgur.com/KxCvY13.png){: .imgCenter}
 {: refdef}
 
-[--- Back to Top ---](#intro){: .imgCenter}
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
 
 ## PI 1: Magic in the Air {#magic-in-the-air}
 ####  Category: Forensics/OSINT | Solves: 52 | Points: 470
@@ -117,7 +123,9 @@ The result provides us with the phone number and country it's from. A quick Goog
 ![Extracted keystrokes](https://i.imgur.com/r0pCHXC.png){: .imgCenter}
 {: refdef}
 
-[--- Back to Top ---](#intro){: .imgCenter}
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
 
 ## PI 2: A Series of Tubes {#a-series-of-tubes}
 ####  Category: Forensics/OSINT | Solves: 22 | Points: 495
@@ -159,7 +167,9 @@ We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:g
 ![Target's flight information](https://i.imgur.com/cfnG4Rh.png){: .imgCenter}
 {: refdef}
 
-[--- Back to Top ---](#intro){: .imgCenter}
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
 
 
 ## Typeracer {#typeracer}
@@ -191,4 +201,6 @@ To solve the challenge from here, all we have to do is type `_0x318f00 = _0x3517
 ![the base64 encoded flag](https://i.imgur.com/LUI3KWa.png){: .imgCenter}
 {: refdef}
 
-[--- Back to Top ---](#intro){: .imgCenter}
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
