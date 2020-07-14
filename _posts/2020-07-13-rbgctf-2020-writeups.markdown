@@ -4,6 +4,17 @@ title: "rgbCTF 2020 Writeups"
 categories: ctf
 ---
 
+## Introduction {#intro}
+
+| Challenge Name | Category | Solves | Points |
+| ---------------|----------|--------|--------|
+|[Alien Transmission 1](#alien-transmission-1) | Forensics/OSINT | 158 | 219 |
+|[Adventure](#adventure) | Misc | 21 | 495|
+|[Robin's Reddit Password]{#robins-reddit-password} | Forensics/OSINT | 30 | 490 |
+|[PI 1: Magic in the Air](#magic-in-the-air) | Forensics/OSINT | 52 | 470 |
+|[PI 2: A Series of Tubes](#a-series-of-tubes) | Forensics/OSINT | 22 | 495 |
+|[Typeracer](#typeracer) | Web | 184 | 119 |
+
 ## Alien Transmission 1 {#alien-transmission-1}
 #### Category: Forensics/OSINT | Solves: 158 | Points: 219
 
@@ -27,6 +38,8 @@ Often times programs that pull data from audio involve complex setups with virtu
 ![The Flag](https://i.imgur.com/fDnVkar.png){: .imgCenter}
 {: refdef}
 
+[--- Back to Top ---](#intro){: .imgCenter}
+
 ## Adventure {#adventure}
 #### Category: Misc | Solves: 21 | Points: 495
 
@@ -45,6 +58,8 @@ So what is immediately obvious is that this is not a standard game (I mean your 
 {:refdef: style="text-align: center;"}
 ![The flag](https://i.imgur.com/Q3n00SO.png){: .imgCenter}
 {: refdef}
+
+[--- Back to Top ---](#intro){: .imgCenter}
 
 ## Robin's Reddit Password {#robins-reddit-password}
 ####  Category: Forensics/OSINT | Solves: 30 | Points: 490
@@ -70,6 +85,8 @@ It's also worth noting that this challenge could have just as easily been solved
 {:refdef: style="text-align: center;"}
 ![](https://i.imgur.com/KxCvY13.png){: .imgCenter}
 {: refdef}
+
+[--- Back to Top ---](#intro){: .imgCenter}
 
 ## PI 1: Magic in the Air {#magic-in-the-air}
 ####  Category: Forensics/OSINT | Solves: 52 | Points: 470
@@ -99,6 +116,8 @@ The result provides us with the phone number and country it's from. A quick Goog
 {:refdef: style="text-align: center;"}
 ![Extracted keystrokes](https://i.imgur.com/r0pCHXC.png){: .imgCenter}
 {: refdef}
+
+[--- Back to Top ---](#intro){: .imgCenter}
 
 ## PI 2: A Series of Tubes {#a-series-of-tubes}
 ####  Category: Forensics/OSINT | Solves: 22 | Points: 495
@@ -140,6 +159,7 @@ We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:g
 ![Target's flight information](https://i.imgur.com/cfnG4Rh.png){: .imgCenter}
 {: refdef}
 
+[--- Back to Top ---](#intro){: .imgCenter}
 
 
 ## Typeracer {#typeracer}
@@ -161,7 +181,7 @@ Straight out of the gate, this looks like a pretty neat little game.  You can't 
 
 The way Firefox Developer Tools were designed actually makes this challenge an absolute breeze. When you start typing a variable name in the javascript console, it not only brings up a list of variables, but also shows the value of whichever one you highlight. Since the obfuscation renames variables in the format of `_0xFFFFFF`, we can easily find the variables corresponding with our input textbox and the target string. 
 
-To solve the challenge from here, we simply type `_0x318f00 = _0x35179f` into the console and hit enter and we're given the base64-encoded flag.
+To solve the challenge from here, all we have to do is type `_0x318f00 = _0x35179f` into the console, start the game, and hit enter.
 
 {:refdef: style="text-align: center;"}
 ![Firefox Developer Tools Javascript console](https://i.imgur.com/QeVTADL.png){: .imgCenter}
@@ -170,3 +190,5 @@ To solve the challenge from here, we simply type `_0x318f00 = _0x35179f` into th
 {:refdef: style="text-align: center;"}
 ![the base64 encoded flag](https://i.imgur.com/LUI3KWa.png){: .imgCenter}
 {: refdef}
+
+[--- Back to Top ---](#intro){: .imgCenter}
