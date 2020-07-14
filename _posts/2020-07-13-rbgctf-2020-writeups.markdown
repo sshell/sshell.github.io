@@ -15,6 +15,8 @@ categories: ctf
 |[Alien Transmission 1](#alien-transmission-1) | Forensics/OSINT | 158 | 219 |
 |[Typeracer](#typeracer) | Web | 184 | 119 |
 
+----------------
+
 ## Adventure {#adventure}
 #### Category: Misc | Solves: 21 | Points: 495
 
@@ -37,6 +39,8 @@ So what is immediately obvious is that this is not a standard game (I mean your 
 {:refdef: style="text-align: center;"}
 [--- Back to Top ---](#intro)
 {: refdef}
+
+----------------
 
 ## PI 1: Magic in the Air {#magic-in-the-air}
 ####  Category: Forensics/OSINT | Solves: 52 | Points: 470
@@ -70,6 +74,8 @@ The result provides us with the phone number and country it's from. A quick Goog
 {:refdef: style="text-align: center;"}
 [--- Back to Top ---](#intro)
 {: refdef}
+
+----------------
 
 ## PI 2: A Series of Tubes {#a-series-of-tubes}
 ####  Category: Forensics/OSINT | Solves: 22 | Points: 495
@@ -115,6 +121,8 @@ We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:g
 [--- Back to Top ---](#intro)
 {: refdef}
 
+----------------
+
 ## Robin's Reddit Password {#robins-reddit-password}
 ####  Category: Forensics/OSINT | Solves: 30 | Points: 490
 
@@ -144,6 +152,8 @@ It's also worth noting that this challenge could have just as easily been solved
 [--- Back to Top ---](#intro)
 {: refdef}
 
+----------------
+
 ## Alien Transmission 1 {#alien-transmission-1}
 #### Category: Forensics/OSINT | Solves: 158 | Points: 219
 
@@ -167,9 +177,13 @@ Often times programs that pull data from audio involve complex setups with virtu
 ![The Flag](https://i.imgur.com/fDnVkar.png){: .imgCenter}
 {: refdef}
 
+----------------
+
 {:refdef: style="text-align: center;"}
 [--- Back to Top ---](#intro)
 {: refdef}
+
+----------------
 
 ## Typeracer {#typeracer}
 ####  Category: Web | Solves: 184 | Points: 119
