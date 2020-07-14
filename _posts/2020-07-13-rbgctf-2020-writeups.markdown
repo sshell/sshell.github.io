@@ -18,7 +18,9 @@ categories: ctf
 ----------------
 
 ## Adventure {#adventure}
+{: style="text-align: center"}
 #### Category: Misc | Solves: 21 | Points: 495
+{: style="text-align: center"}
 
 {:refdef: style="text-align: center;"}
 ![Adventure challenge description](https://i.imgur.com/jHrTIPk.png){: .imgCenter}
@@ -45,7 +47,9 @@ So what is immediately obvious is that this is not a standard game (I mean your 
 ----------------
 
 ## PI 1: Magic in the Air {#magic-in-the-air}
+{: style="text-align: center"}
 ####  Category: Forensics/OSINT | Solves: 52 | Points: 470
+{: style="text-align: center"}
 
 {:refdef: style="text-align: center;"}
 ![Challenge text](https://i.imgur.com/6EMB1Ud.png){: .imgCenter}
@@ -82,7 +86,9 @@ The result provides us with the phone number and country it's from. A quick Goog
 ----------------
 
 ## PI 2: A Series of Tubes {#a-series-of-tubes}
+{: style="text-align: center"}
 ####  Category: Forensics/OSINT | Solves: 22 | Points: 495
+{: style="text-align: center"}
 
 {:refdef: style="text-align: center;"}
 ![Challenge text](https://i.imgur.com/s1Kjle4.png){: .imgCenter}
@@ -130,7 +136,9 @@ We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:g
 ----------------
 
 ## Robin's Reddit Password {#robins-reddit-password}
+{: style="text-align: center"}
 ####  Category: Forensics/OSINT | Solves: 30 | Points: 490
+{: style="text-align: center"}
 
 {:refdef: style="text-align: center;"}
 ![Challenge text](https://i.imgur.com/TGz3N9X.png){: .imgCenter}
@@ -199,7 +207,9 @@ Often times programs that pull data from audio involve complex setups with virtu
 ----------------
 
 ## Typeracer {#typeracer}
+{: style="text-align: center"}
 ####  Category: Web | Solves: 184 | Points: 119
+{: style="text-align: center"}
 
 {:refdef: style="text-align: center;"}
 ![Typeracer challenge description](https://i.imgur.com/nPMIccf.png){: .imgCenter}
