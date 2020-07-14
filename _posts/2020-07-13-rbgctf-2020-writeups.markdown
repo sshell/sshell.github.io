@@ -70,3 +70,42 @@ It's also worth noting that this challenge could have just as easily been solved
 {:refdef: style="text-align: center;"}
 ![](https://i.imgur.com/KxCvY13.png){: .imgCenter}
 {: refdef}
+
+## PI 1: Magic in the Air {#magic-in-the-air}
+####  Category: Forensics/OSINT | Solves: 52 | Points: 470
+
+{:refdef: style="text-align: center;"}
+![Challenge text](https://i.imgur.com/6EMB1Ud.png){: .imgCenter}
+{: refdef}
+
+Right off the bat we know we're dealing with some sort of sniffed wireless traffic. Opening the unzipped file in a hex editor confirms that we're dealing with a Bluetooth capture, so we can go ahead and open it up in Wireshark and get a better idea of what exactly we're working with.
+
+{:refdef: style="text-align: center;"}
+![File in hex editor](https://i.imgur.com/OzIlchO.png){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+![Bluetooth capture in Wireshark](https://i.imgur.com/SDHijwo.png){: .imgCenter}
+{: refdef}
+
+The source is named G613 and we know it's a Human Interface Device, a quick Google search will show that it's a [wireless keyboard](https://www.logitechg.com/en-us/products/gaming-keyboards/g613-wireless-mechanical-gaming-keyboard.html). A quick once-over of the file reveals that the most commonly received message is this "Rcvd Handle Value Notification" which has the same 12-byte header and a constantly changing 13th byte. This is easily confirmed by flipping through packets while referencing [this keymap](https://github.com/greatscottgadgets/libbtbb/blob/master/python/pcaptools/btaptap) from the [greatscottgadgets/libbtbb](greatscottgadgets/libbtbb) repo on GitHub. We convert the file to hex and then write this snippet of code to regex out the information we need and compare it to the keymap dictionary we found earlier.
+
+{:refdef: style="text-align: center;"}
+![Python code to extract keystrokes from Bluetooth capture](https://i.imgur.com/G4W4aCA.png){: .imgCenter}
+{: refdef}
+
+The result provides us with the phone number and country it's from. A quick Google search reveals that +46 is the dialing code for Sweden, so we have everything we need to solve this challenge and start on the next!
+
+{:refdef: style="text-align: center;"}
+![Extracted keystrokes](https://i.imgur.com/r0pCHXC.png){: .imgCenter}
+{: refdef}
+
+## PI 2: A Series of Tubes {#a-series-of-tubes}
+####  Category: Forensics/OSINT | Solves: 22 | Points: 495
+
+Coming Soon
+
+## Typeracer {#typeracer}
+####  Category: Web | Solves: 184 | Points: 119
+
+Coming Soon
