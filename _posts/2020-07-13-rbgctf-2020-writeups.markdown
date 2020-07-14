@@ -10,7 +10,7 @@ categories: ctf
 | ---------------|----------|--------|--------|
 |[Alien Transmission 1](#alien-transmission-1) | Forensics/OSINT | 158 | 219 |
 |[Adventure](#adventure) | Misc | 21 | 495|
-|[Robin's Reddit Password]{#robins-reddit-password} | Forensics/OSINT | 30 | 490 |
+|[Robin's Reddit Password](#robins-reddit-password) | Forensics/OSINT | 30 | 490 |
 |[PI 1: Magic in the Air](#magic-in-the-air) | Forensics/OSINT | 52 | 470 |
 |[PI 2: A Series of Tubes](#a-series-of-tubes) | Forensics/OSINT | 22 | 495 |
 |[Typeracer](#typeracer) | Web | 184 | 119 |
