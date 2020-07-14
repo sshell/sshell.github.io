@@ -8,40 +8,12 @@ categories: ctf
 
 | Challenge Name | Category | Solves | Points |
 |:--------------:|:--------:|:------:|:------:|
-|[Alien Transmission 1](#alien-transmission-1) | Forensics/OSINT | 158 | 219 |
 |[Adventure](#adventure) | Misc | 21 | 495|
-|[Robin's Reddit Password](#robins-reddit-password) | Forensics/OSINT | 30 | 490 |
 |[PI 1: Magic in the Air](#magic-in-the-air) | Forensics/OSINT | 52 | 470 |
 |[PI 2: A Series of Tubes](#a-series-of-tubes) | Forensics/OSINT | 22 | 495 |
+|[Robin's Reddit Password](#robins-reddit-password) | Forensics/OSINT | 30 | 490 |
+|[Alien Transmission 1](#alien-transmission-1) | Forensics/OSINT | 158 | 219 |
 |[Typeracer](#typeracer) | Web | 184 | 119 |
-
-
-## Alien Transmission 1 {#alien-transmission-1}
-#### Category: Forensics/OSINT | Solves: 158 | Points: 219
-
-{:refdef: style="text-align: center;"}
-![Alien Transmission Challenge Text](https://i.imgur.com/EIH4MFK.png){: .imgCenter}
-{: refdef}
-
-We're given a .WAV file, and the clue tells us that it came over the radio, so right away we can go looking for ways to decode this 36 second audio clip into something meaningful.  When you open it with Audacity and look at the spectrogram,  we are presented with the image on the left.  After a little bit of digging, the image matches pretty closely with what a [Slow Scan Television (SSTV)](https://en.wikipedia.org/wiki/Slow-scan_television) signal looks like (image on the right) 
-
-{:refdef: style="text-align: center;"}
-![Audacity ](https://i.imgur.com/0dOxkYh.png){: .imgCenter}
-{: refdef}
-
-Often times programs that pull data from audio involve complex setups with virtual audio devices and whatnot. Luckily there's a tool on GitHub ([xdsopl/robot36](https://github.com/xdsopl/robot36)) to encode/decode SSTV in a mode called Robot36. After compiling the tool, we run it against the file and grab our flag!
-
-{:refdef: style="text-align: center;"}
-![robot36 output](https://i.imgur.com/HqFVEe8.png){: .imgCenter}
-{: refdef}
-
-{:refdef: style="text-align: center;"}
-![The Flag](https://i.imgur.com/fDnVkar.png){: .imgCenter}
-{: refdef}
-
-{:refdef: style="text-align: center;"}
-[--- Back to Top ---](#intro)
-{: refdef}
 
 ## Adventure {#adventure}
 #### Category: Misc | Solves: 21 | Points: 495
@@ -60,35 +32,6 @@ So what is immediately obvious is that this is not a standard game (I mean your 
 
 {:refdef: style="text-align: center;"}
 ![The flag](https://i.imgur.com/Q3n00SO.png){: .imgCenter}
-{: refdef}
-
-{:refdef: style="text-align: center;"}
-[--- Back to Top ---](#intro)
-{: refdef}
-
-## Robin's Reddit Password {#robins-reddit-password}
-####  Category: Forensics/OSINT | Solves: 30 | Points: 490
-
-{:refdef: style="text-align: center;"}
-![Challenge text](https://i.imgur.com/TGz3N9X.png){: .imgCenter}
-{: refdef}
-
-I have to admit that at first I couldn't quite wrap my head around this one, but the bit about breaking into Reddit's server reminded me of a funny easter egg someone had sent me before.
-
-{:refdef: style="text-align: center;"}
-![reddit easter egg](https://i.imgur.com/n7Fe1SN.png){: .imgCenter}
-{: refdef}
-
-Sure enough, one of the users here is Robin.  We google the hash and find out that someone has already cracked the hashes for us (thank you, stranger) so we can just wrap it in the flag format and submit it!
-
-{:refdef: style="text-align: center;"}
-![reddit hashes crakced](https://i.imgur.com/TZF5DWe.png){: .imgCenter}
-{: refdef}
-
-It's also worth noting that this challenge could have just as easily been solved with one Google search as well.
-
-{:refdef: style="text-align: center;"}
-![](https://i.imgur.com/KxCvY13.png){: .imgCenter}
 {: refdef}
 
 {:refdef: style="text-align: center;"}
@@ -172,6 +115,61 @@ We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:g
 [--- Back to Top ---](#intro)
 {: refdef}
 
+## Robin's Reddit Password {#robins-reddit-password}
+####  Category: Forensics/OSINT | Solves: 30 | Points: 490
+
+{:refdef: style="text-align: center;"}
+![Challenge text](https://i.imgur.com/TGz3N9X.png){: .imgCenter}
+{: refdef}
+
+I have to admit that at first I couldn't quite wrap my head around this one, but the bit about breaking into Reddit's server reminded me of a funny easter egg someone had sent me before.
+
+{:refdef: style="text-align: center;"}
+![reddit easter egg](https://i.imgur.com/n7Fe1SN.png){: .imgCenter}
+{: refdef}
+
+Sure enough, one of the users here is Robin.  We google the hash and find out that someone has already cracked the hashes for us (thank you, stranger) so we can just wrap it in the flag format and submit it!
+
+{:refdef: style="text-align: center;"}
+![reddit hashes crakced](https://i.imgur.com/TZF5DWe.png){: .imgCenter}
+{: refdef}
+
+It's also worth noting that this challenge could have just as easily been solved with one Google search as well.
+
+{:refdef: style="text-align: center;"}
+![](https://i.imgur.com/KxCvY13.png){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
+
+## Alien Transmission 1 {#alien-transmission-1}
+#### Category: Forensics/OSINT | Solves: 158 | Points: 219
+
+{:refdef: style="text-align: center;"}
+![Alien Transmission Challenge Text](https://i.imgur.com/EIH4MFK.png){: .imgCenter}
+{: refdef}
+
+We're given a .WAV file, and the clue tells us that it came over the radio, so right away we can go looking for ways to decode this 36 second audio clip into something meaningful.  When you open it with Audacity and look at the spectrogram,  we are presented with the image on the left.  After a little bit of digging, the image matches pretty closely with what a [Slow Scan Television (SSTV)](https://en.wikipedia.org/wiki/Slow-scan_television) signal looks like (image on the right) 
+
+{:refdef: style="text-align: center;"}
+![Audacity ](https://i.imgur.com/0dOxkYh.png){: .imgCenter}
+{: refdef}
+
+Often times programs that pull data from audio involve complex setups with virtual audio devices and whatnot. Luckily there's a tool on GitHub ([xdsopl/robot36](https://github.com/xdsopl/robot36)) to encode/decode SSTV in a mode called Robot36. After compiling the tool, we run it against the file and grab our flag!
+
+{:refdef: style="text-align: center;"}
+![robot36 output](https://i.imgur.com/HqFVEe8.png){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+![The Flag](https://i.imgur.com/fDnVkar.png){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
 
 ## Typeracer {#typeracer}
 ####  Category: Web | Solves: 184 | Points: 119
