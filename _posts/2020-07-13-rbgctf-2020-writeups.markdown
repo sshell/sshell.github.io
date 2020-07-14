@@ -271,7 +271,7 @@ To solve the challenge from here, all we have to do is type `_0x318f00 = _0x3517
 ![Sample path data](https://i.imgur.com/qjGVq1c.png){: .imgCenter}
 {: refdef}
 
-{% highlight go linenos %}
+{% highlight go %}
 package main
 
 import (
