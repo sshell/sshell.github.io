@@ -39,6 +39,10 @@
 	display: inline;
 }
 
+.sidebar-nav-item img {
+	margin: 0px;
+}
+
 * {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
