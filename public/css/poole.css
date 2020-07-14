@@ -41,6 +41,7 @@
 
 .sidebar-nav-item img {
 	margin: 0px;
+	vertical-align: middle;
 }
 
 * {
