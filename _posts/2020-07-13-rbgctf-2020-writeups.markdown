@@ -61,7 +61,7 @@ Right off the bat we know we're dealing with some sort of sniffed wireless traff
 ![Bluetooth capture in Wireshark](https://i.imgur.com/SDHijwo.png){: .imgCenter}
 {: refdef}
 
-The source is named G613 and we know it's a Human Interface Device, a quick Google search will show that it's a [wireless keyboard](https://www.logitechg.com/en-us/products/gaming-keyboards/g613-wireless-mechanical-gaming-keyboard.html). A quick once-over of the file reveals that the most commonly received message is this "Rcvd Handle Value Notification" which has the same 12-byte header and a constantly changing 13th byte. This is easily confirmed by flipping through packets while referencing [this keymap](https://github.com/greatscottgadgets/libbtbb/blob/master/python/pcaptools/btaptap) from the [greatscottgadgets/libbtbb](greatscottgadgets/libbtbb) repo on GitHub. We convert the file to hex and then write this snippet of code to regex out the information we need and compare it to the keymap dictionary we found earlier.
+The source is named G613 and we know it's a Human Interface Device, a quick Google search will show that it's a [wireless keyboard](https://www.logitechg.com/en-us/products/gaming-keyboards/g613-wireless-mechanical-gaming-keyboard.html). A quick once-over of the file reveals that the most commonly received message is this "Rcvd Handle Value Notification" which has the same 12-byte header and a constantly changing 13th byte. This is easily confirmed by flipping through packets while referencing [this keymap](https://github.com/greatscottgadgets/libbtbb/blob/master/python/pcaptools/btaptap) from the [greatscottgadgets/libbtbb](https://github.com/greatscottgadgets/libbtbb/) repo on GitHub. We convert the file to hex and then write this snippet of code to regex out the information we need and compare it to the keymap dictionary we found earlier.
 
 {:refdef: style="text-align: center;"}
 ![Python code to extract keystrokes from Bluetooth capture](https://i.imgur.com/G4W4aCA.png){: .imgCenter}
@@ -227,3 +227,4 @@ To solve the challenge from here, all we have to do is type `_0x318f00 = _0x3517
 {:refdef: style="text-align: center;"}
 [--- Back to Top ---](#intro)
 {: refdef}
+
