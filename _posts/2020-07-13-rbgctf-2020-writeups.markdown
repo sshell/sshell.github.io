@@ -36,6 +36,8 @@ So what is immediately obvious is that this is not a standard game (I mean your 
 ![The flag](https://i.imgur.com/Q3n00SO.png){: .imgCenter}
 {: refdef}
 
+----------------
+
 {:refdef: style="text-align: center;"}
 [--- Back to Top ---](#intro)
 {: refdef}
@@ -70,6 +72,8 @@ The result provides us with the phone number and country it's from. A quick Goog
 {:refdef: style="text-align: center;"}
 ![Extracted keystrokes](https://i.imgur.com/r0pCHXC.png){: .imgCenter}
 {: refdef}
+
+----------------
 
 {:refdef: style="text-align: center;"}
 [--- Back to Top ---](#intro)
@@ -117,6 +121,8 @@ We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:g
 ![Target's flight information](https://i.imgur.com/cfnG4Rh.png){: .imgCenter}
 {: refdef}
 
+----------------
+
 {:refdef: style="text-align: center;"}
 [--- Back to Top ---](#intro)
 {: refdef}
@@ -147,6 +153,8 @@ It's also worth noting that this challenge could have just as easily been solved
 {:refdef: style="text-align: center;"}
 ![](https://i.imgur.com/KxCvY13.png){: .imgCenter}
 {: refdef}
+
+----------------
 
 {:refdef: style="text-align: center;"}
 [--- Back to Top ---](#intro)
@@ -213,6 +221,8 @@ To solve the challenge from here, all we have to do is type `_0x318f00 = _0x3517
 {:refdef: style="text-align: center;"}
 ![the base64 encoded flag](https://i.imgur.com/LUI3KWa.png){: .imgCenter}
 {: refdef}
+
+----------------
 
 {:refdef: style="text-align: center;"}
 [--- Back to Top ---](#intro)
