@@ -5,6 +5,7 @@ categories: ctf
 ---
 
 ## Introduction {#intro}
+{: style="text-align: center"}
 
 | Challenge Name | Category | Solves | Points |
 |:--------------:|:--------:|:------:|:------:|
