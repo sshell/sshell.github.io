@@ -130,6 +130,8 @@ On Instagram we can quickly scan his public highlights to see that he's mentione
 
 In his highlights, he also posts a partially redacted screenshot of a flight itinerary leaving from [UNKNOWN] and heading to Amsterdam. Since we have determined that the target lives in Birmingham, we can look up flights on that day from Birmingham to Amsterdam to find the flight number which is `KL 1426`. All that's left is to do a quick Google search for the ISO 3166-1 Alpha 2 code (which for England is surprisingly 'GB' and not 'UK.')
 
+We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:gb:kl1426}`
+
 {:refdef: style="text-align: center;"}
 ![Instagram story highlight](https://i.imgur.com/b8PzcpG.jpg){: .imgCenter}
 {: refdef}
@@ -138,7 +140,7 @@ In his highlights, he also posts a partially redacted screenshot of a flight iti
 ![Target's flight information](https://i.imgur.com/cfnG4Rh.png){: .imgCenter}
 {: refdef}
 
-We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:gb:kl1426}`
+
 
 ## Typeracer {#typeracer}
 ####  Category: Web | Solves: 184 | Points: 119
