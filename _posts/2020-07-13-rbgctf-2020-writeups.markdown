@@ -103,7 +103,42 @@ The result provides us with the phone number and country it's from. A quick Goog
 ## PI 2: A Series of Tubes {#a-series-of-tubes}
 ####  Category: Forensics/OSINT | Solves: 22 | Points: 495
 
-Coming Soon
+{:refdef: style="text-align: center;"}
+![Challenge text](https://i.imgur.com/s1Kjle4.png){: .imgCenter}
+
+The challenge before this had us extract a suspect's phone number from a Bluetooth capture file. A quick Google search doesn't return anything of value, but that's okay because there's a lot of places you can go with a phone number.  We put the number into our phone and open Snapchat, one of the million social media apps that want access to our contact list.
+
+{:refdef: style="text-align: center;"}
+![Added contact to phonebook](https://i.imgur.com/vV8ZD86.jpg){: .imgCenter}
+{: refdef}
+
+Lo and behold, good ol' Donny is not only on Snapchat, but actively posting information to his public "story" that we can use to pivot to other social media platforms. 
+
+{:refdef: style="text-align: center;"}
+![Snapchat suggesting my new contact](https://i.imgur.com/IFTMyug.jpg){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+![Target's Snapchat story](https://i.imgur.com/Rc4UZPd.jpg){: .imgCenter}
+{: refdef}
+
+On Instagram we can quickly scan his public highlights to see that he's mentioned being in Bristol, Digbeth, "Brum" (slang for Birmingham), and "Selly" (short for Selly Oak, an area in Birmingham.) Since he mentions being in Selly with housemates, we can safely assume that he lives there.
+
+{:refdef: style="text-align: center;"}
+![Instagram story highlight](https://i.imgur.com/8pKcqkv.jpg){: .imgCenter}
+{: refdef}
+
+In his highlights, he also posts a partially redacted screenshot of a flight itinerary leaving from [UNKNOWN] and heading to Amsterdam. Since we have determined that the target lives in Birmingham, we can look up flights on that day from Birmingham to Amsterdam to find the flight number which is `KL 1426`. All that's left is to do a quick Google search for the ISO 3166-1 Alpha 2 code (which for England is surprisingly 'GB' and not 'UK.')
+
+{:refdef: style="text-align: center;"}
+![Instagram story highlight](https://i.imgur.com/b8PzcpG.jpg){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+![Target's flight information](https://i.imgur.com/cfnG4Rh.png){: .imgCenter}
+{: refdef}
+
+We put all this together to get our flag : `rgbCTF{donovanlockheart:birmingham:gb:kl1426}`
 
 ## Typeracer {#typeracer}
 ####  Category: Web | Solves: 184 | Points: 119
