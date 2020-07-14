@@ -6,6 +6,7 @@ categories: ctf
 
 ## Introduction {#intro}
 
+{:refdef: style="text-align: center;"}
 | Challenge Name | Category | Solves | Points |
 | ---------------|----------|--------|--------|
 |[Alien Transmission 1](#alien-transmission-1) | Forensics/OSINT | 158 | 219 |
@@ -14,6 +15,7 @@ categories: ctf
 |[PI 1: Magic in the Air](#magic-in-the-air) | Forensics/OSINT | 52 | 470 |
 |[PI 2: A Series of Tubes](#a-series-of-tubes) | Forensics/OSINT | 22 | 495 |
 |[Typeracer](#typeracer) | Web | 184 | 119 |
+{: refdef}
 
 ## Alien Transmission 1 {#alien-transmission-1}
 #### Category: Forensics/OSINT | Solves: 158 | Points: 219
