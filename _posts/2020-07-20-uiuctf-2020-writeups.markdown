@@ -104,11 +104,11 @@ Here's what all the data looks like when we're all done:
 
 | name | hint | hash | password | flag |
 |------|------|------|----------|------|
-| noob | `(none)` | 8553127fedf5daacc26f3b677b58a856 | SoccerMom2007 | `Here's part 0 of the flag: uiuctf{Dump` |
-| alice | `My phone number (format: 000-000-0000)` | 530bd2d24bff2d77276c4117dc1fc719 | 704-186-9744 | ` _4nd_un` |
-| bob | `My favorite 12 digit number (md5 hashed for extra security) [starts with a 10]` | 4106716ae604fba94f1c05318f87e063 | 5809be03c7cc31cdb12237d0bd718898 | `h45h_63` |
-| carl | `My favorite Greek God + My least favorite US state (no spaces)` | 661ded81b6b99758643f19517a468331 | DionysusDelaware | `7_d4t_` |
-| dania | `الحيوان المفضل لدي (6 أحرف عربية فقط)` | 58970d579d25f7288599fcd709b3ded3 | طاووسة | `c45h}` |
+| `noob` | `(none)` | `8553127fedf5daacc26f3b677b58a856` | `SoccerMom2007` | `uiuctf{Dump` |
+| `alice` | `My phone number (format: 000-000-0000)` | `530bd2d24bff2d77276c4117dc1fc719` | `704-186-9744` | ` _4nd_un` |
+| `bob` | `My favorite 12 digit number (md5 hashed for extra security) [starts with a 10]` | `4106716ae604fba94f1c05318f87e063` | `5809be03c7cc31cdb12237d0bd718898` | `h45h_63` |
+| `carl` | `My favorite Greek God + My least favorite US state (no spaces)` | `661ded81b6b99758643f19517a468331` | `DionysusDelaware` | `7_d4t_` |
+| `dania` | `الحيوان المفضل لدي (6 أحرف عربية فقط)` | `58970d579d25f7288599fcd709b3ded3` | `طاووسة` | `c45h}` |
 
 
 ----------------
