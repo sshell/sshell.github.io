@@ -41,17 +41,29 @@ After playing around with injections for a little while, we find a nested SELECT
 
 Through trial and error, we find that there are three basic ways in which the server can respond to our queries: with data, with no data, or with an error. Each of these happens in a different situation and gives us more insight into the structure of the database.
 
-First, since we already know `USERNAME` exists, we use this as a baseline for a known-good query. We see that we get user data back when a specific column exists.
+First, since we already know USERNAME exists, we use this as a baseline for a known-good query. We see that we get user data back when a specific column exists.
 
 `%" AND username in (SELECT username FROM sqlite_master where username like "%") --`
+
+{:refdef: style="text-align: center;"}
+![results from good sql subquery](https://i.imgur.com/OAYJGKx.png){: .imgCenter}
+{: refdef}
 
 Next, we try to query columns for users we know don't exist.  This simply returns no information at all, without giving us any errors.
 
 `%" AND username in (SELECT username FROM sqlite_master where username like "FAKE") --`
 
+{:refdef: style="text-align: center;"}
+![results from good sql subquery](https://i.imgur.com/22ycWWR.png){: .imgCenter}
+{: refdef}
+
 Lastly, we try a non-existent column to establish a baseline response for faulty queries.  When this is the case, we get the message `ERROR: Something went wrong!` We also get this error when we forget to comment out otherwise good, working queries by ending the query with the SQL single-line comment symbol `--`
 
 `%" AND username in (SELECT username FROM sqlite_master where FAKE like "%") --`
+
+{:refdef: style="text-align: center;"}
+![error message on bad sql query](https://i.imgur.com/vq2OnGe.png){: .imgCenter}
+{: refdef}
 
 Using this knowledge we can guess at what the password column must be called, and after a couple tries we find that "password_hash" doesn't throw us any errors.  Now that we know what we're up against, we can switch up our query and use our old wildcard friend to brute-force the hash 1 character at a time by using a query like:
 
@@ -98,7 +110,7 @@ Side note: the password/hash combo is on Google because it is in the very popula
 ![looking up the first hash on google](https://i.imgur.com/Z9YPC5d.png){: .imgCenter}
 {: refdef}
 
-The second and third hashes are cracked very quickly with a very basic Hashcat command. It's worth noting that Hashcat has a built in mode for double MD5 (-m 2600), so Bob's password isn't really any harder to crack than Alice's as far as the commands go (although double MD5 is obviously slightly slower to crack.) If you want to learn more about the basics of cracking hashes with Hashcat, you can do so [here](https://laconicwolf.com/2018/09/29/hashcat-tutorial-the-basics-of-cracking-passwords-with-hashcat/)
+The second and third hashes are cracked very quickly with a very basic Hashcat command. It's worth noting that Hashcat has a built in mode for double MD5 (-m 2600), so Bob's password isn't really any harder to crack than Alice's as far as the commands go (although double MD5 is obviously slightly slower to crack.) If you want to learn more about the basics of cracking hashes with Hashcat, you can do so [here.](https://laconicwolf.com/2018/09/29/hashcat-tutorial-the-basics-of-cracking-passwords-with-hashcat/)
 
 Hash number four requires us to build our own wordlist in the format of [Greek God name](https://gist.github.com/sshell/308f3518221d98c16a7b69eb9b209d85#file-gods-txt) + [U.S. State name](https://gist.github.com/sshell/308f3518221d98c16a7b69eb9b209d85#file-states-txt). This can be accomplished by finding these two separate lists on Google, and mixing with a [quick Python script](https://gist.github.com/sshell/308f3518221d98c16a7b69eb9b209d85#file-combine-py). I'm not going to include it here since it's mundane, but you can click the links if you want to see the lists and code behind this task. We found that the password ended up being `DionysusDelaware` and claimed the 4th piece of the flag.
 
