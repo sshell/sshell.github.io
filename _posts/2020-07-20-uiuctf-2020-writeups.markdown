@@ -42,15 +42,19 @@ After playing around with injections for a little while, we find a nested SELECT
 Through trial and error, we find that there are three basic ways in which the server can respond to our queries: with data, with no data, or with an error. Each of these happens in a different situation and gives us more insight into the structure of the database.
 
 First, since we already know `USERNAME` exists, we use this as a baseline for a known-good query. We see that we get user data back when a specific column exists.
+
 `%" AND username in (SELECT username FROM sqlite_master where username like "%") --`
 
 Next, we try to query columns for users we know don't exist.  This simply returns no information at all, without giving us any errors.
+
 `%" AND username in (SELECT username FROM sqlite_master where username like "FAKE") --`
 
 Lastly, we try a non-existent column to establish a baseline response for faulty queries.  When this is the case, we get the message `ERROR: Something went wrong!` We also get this error when we forget to comment out otherwise good, working queries by ending the query with the SQL single-line comment symbol `--`
+
 `%" AND username in (SELECT username FROM sqlite_master where FAKE like "%") --`
 
 Using this knowledge we can guess at what the password column must be called, and after a couple tries we find that "password_hash" doesn't throw us any errors.  Now that we know what we're up against, we can switch up our query and use our old wildcard friend to brute-force the hash 1 character at a time by using a query like:
+
 `%" AND username in (SELECT username FROM sqlite_master where password_hash like "%") --`
 
 Below is Python script that will be responsible for doing all of the heavy lifting. If what we know of the hash so far is correct for that user, the user's information is returned (e.g if Bob's hash starts with `41%`.) If any character of the hash so far is wrong (e.g if we ask if Bob's hash starts with `4F%`) the application won't return us any info at all. This allows us to check for the existence of the `bio` string for each user to make sure we're always on the right track.
