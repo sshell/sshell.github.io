@@ -54,7 +54,7 @@ Next, we try to query columns for users we know don't exist.  This simply return
 `%" AND username in (SELECT username FROM sqlite_master where username like "FAKE") --`
 
 {:refdef: style="text-align: center;"}
-![results from good sql subquery](https://i.imgur.com/22ycWWR.png){: .imgCenter}
+![no results from sql subquery](https://i.imgur.com/22ycWWR.png){: .imgCenter}
 {: refdef}
 
 Lastly, we try a non-existent column to establish a baseline response for faulty queries.  When this is the case, we get the message `ERROR: Something went wrong!` We also get this error when we forget to comment out otherwise good, working queries by ending the query with the SQL single-line comment symbol `--`
@@ -68,6 +68,10 @@ Lastly, we try a non-existent column to establish a baseline response for faulty
 Using this knowledge we can guess at what the password column must be called, and after a couple tries we find that "password_hash" doesn't throw us any errors.  Now that we know what we're up against, we can switch up our query and use our old wildcard friend to brute-force the hash 1 character at a time by using a query like:
 
 `%" AND username in (SELECT username FROM sqlite_master where password_hash like "%") --`
+
+{:refdef: style="text-align: center;"}
+![results from good sql subquery](https://i.imgur.com/mvZXAJu.png){: .imgCenter}
+{: refdef}
 
 Below is Python script that will be responsible for doing all of the heavy lifting. If what we know of the hash so far is correct for that user, the user's information is returned (e.g if Bob's hash starts with `41%`.) If any character of the hash so far is wrong (e.g if we ask if Bob's hash starts with `4F%`) the application won't return us any info at all. This allows us to check for the existence of the `bio` string for each user to make sure we're always on the right track.
 
