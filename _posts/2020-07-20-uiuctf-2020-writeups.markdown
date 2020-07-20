@@ -94,6 +94,10 @@ When run, this bad boy gives us the output of:
 Now that we have extracted all the hashes, we can get to work trying to crack them using the hints we are given.  Luckily, there is only one hash without a corresponding hint (`8553127fedf5daacc26f3b677b58a856`) and with a simple Google search we find out that the password is `SoccerMom2007`. We use this password to sign in and are given the first part of our flag : `uiuctf{Dump`
 Side note: the password/hash combo is on Google because it is in the very popular [RockYou wordlist](https://github.com/praetorian-code/Hob0Rules/blob/master/wordlists/rockyou.txt.gz) that is very commonly used in CTF-like challenges and is even included in Kali Linux (can be found in `/usr/share/wordlists/rockyou.txt.gz`)
 
+{:refdef: style="text-align: center;"}
+![looking up the first hash on google](https://i.imgur.com/Z9YPC5d.png){: .imgCenter}
+{: refdef}
+
 The second and third hashes are cracked very quickly with a very basic Hashcat command. It's worth noting that Hashcat has a built in mode for double MD5 (-m 2600), so Bob's password isn't really any harder to crack than Alice's as far as the commands go (although double MD5 is obviously slightly slower to crack.) If you want to learn more about the basics of cracking hashes with Hashcat, you can do so [here](https://laconicwolf.com/2018/09/29/hashcat-tutorial-the-basics-of-cracking-passwords-with-hashcat/)
 
 Hash number four requires us to build our own wordlist in the format of [Greek God name](https://gist.github.com/sshell/308f3518221d98c16a7b69eb9b209d85#file-gods-txt) + [U.S. State name](https://gist.github.com/sshell/308f3518221d98c16a7b69eb9b209d85#file-states-txt). This can be accomplished by finding these two separate lists on Google, and mixing with a [quick Python script](https://gist.github.com/sshell/308f3518221d98c16a7b69eb9b209d85#file-combine-py). I'm not going to include it here since it's mundane, but you can click the links if you want to see the lists and code behind this task. We found that the password ended up being `DionysusDelaware` and claimed the 4th piece of the flag.
@@ -103,6 +107,10 @@ The fifth and final hash is the most interesting one of the bunch.  The password
 `hashcat -m 0 -a 3 --hex-charset -1 d8d9dadb -2 808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebf -o output hashes "?1?2?1?2?1?2?1?2?1?2?1?2"`
 
 On this [UTF-8 encoding table,](https://utf8-chartable.de/unicode-utf8-table.pl?start=1536) Arabic letters span 256 characters from `D880` to `DBBF`. We split up these two bytes and create a mask for each, meaning that each single Arabic letter is represented in the mask by a `?1?2` pair. Once we get the rule written, the hash is cracked rather quickly. With the final hash cracked, all we have to do is put together the five pieces of the flag and claim out 200 points!
+
+{:refdef: style="text-align: center;"}
+![arabic character on the unicode/utf-8 character table](https://i.imgur.com/49zr7TC.png){: .imgCenter}
+{: refdef}
 
 Here's what all the data looks like when we're all done:
 
