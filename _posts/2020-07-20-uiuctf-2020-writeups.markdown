@@ -9,14 +9,25 @@ categories: ctf
 
 | Challenge Name | Category | Solves | Points |
 |:--------------:|:--------:|:------:|:------:|
-|[login_page](#login_page) | Web | 23 | 200 |
+|[login_page](#login_page) | Web | 20 | 200 |
+|[Starter OSINT](#starter-osint) | OSINT | 95 | 20 |
+|[Isabelle's Bad Opsec 1](#isabelles-bad-opsec-1) | OSINT | 87 | 40 |
+|[Isabelle's Bad Opsec 2](#isabelles-bad-opsec-2) | OSINT | 81 | 40 |
+|[Isabelle's Bad Opsec 3](#isabelles-bad-opsec-3) | OSINT | 28 | 80 |
+|[Isabelle's Bad Opsec 4](#isabelles-bad-opsec-4) | OSINT | 21 | 100 |
+|[Isabelle's Bad Opsec 5](#isabelles-bad-opsec-5) | OSINT | 32 | 100 |
 
+Date : Thu, 16 July 2020, 23:00 PDT — Sat, 18 July 2020, 23:00 PDT 
+
+Teams with Points : 387  
+
+Notes : First blood on Starter OSINT, Isabelle's Bad Opsec 1, & Isabelle's Bad Opsec 2
 
 ----------------
 
 ## login_page {#login_page}
 {: style="text-align: center"}
-#### Category: Web | Solves: 23 | Points: 200
+#### Category: Web | Solves: 20 | Points: 200
 {: style="text-align: center"}
 
 ----------------
@@ -137,6 +148,187 @@ Here's what all the data looks like when we're all done:
 | `bob` | `My favorite 12 digit number (md5 hashed for extra security) [starts with a 10]` | `4106716ae604fba94f1c05318f87e063` | `5809be03c7cc31cdb12237d0bd718898` | `h45h_63` |
 | `carl` | `My favorite Greek God + My least favorite US state (no spaces)` | `661ded81b6b99758643f19517a468331` | `DionysusDelaware` | `7_d4t_` |
 | `dania` | `الحيوان المفضل لدي (6 أحرف عربية فقط)` | `58970d579d25f7288599fcd709b3ded3` | `طاووسة` | `c45h}` |
+
+----------------
+
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
+
+----------------
+
+## Starter OSINT {#starter-osint}
+{: style="text-align: center"}
+#### Category: OSINT | Solves: 95 | Points: 20
+{: style="text-align: center"}
+
+----------------
+
+```Our friend isabelle has recently gotten into cybersecurity, she made a point of it by rampantly tweeting about it. Maybe you can find some useful information ;).
+
+While you may not need it, IsabelleBot has information that applies to this challenge.
+
+Finishing the warmup OSINT chal will really help with all the other osint chals
+
+The first two characters of the internal of this flag are 'g0', it may not be plaintext
+
+Made By: Thomas (I like OSINT)```
+
+We're looking for an account that has been active recently and is  named/has something to do with the character Isabelle. A quick Twitter  search for `"Isabelle"+"Security" `or `"Isabelle"+"Hack"` sorted by "Latest" will lead you to the user "epichackerisabelle" / [@hackerisabelle](https://twitter.com/hackerisabelle) after a small bit of scrolling. We make sure to click the "Tweets & Replies" button up top so that we see ALL of her tweets, and after a  bit of scrolling, we find the flag.
+
+{:refdef: style="text-align: center;"}
+![isabelle's past tweet](https://i.imgur.com/RuDRymr.png){: .imgCenter}
+{: refdef}
+
+----------------
+
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
+
+----------------
+
+## Isabelle's Bad Opsec 1 {#isabelles-bad-opsec-1}
+{: style="text-align: center"}
+#### Category: OSINT | Solves: 87 | Points: 40
+{: style="text-align: center"}
+
+----------------
+
+```Isabelle has some really bad opsec! She left some code up on a repo that definitely shouldnt be public. Find the naughty code and claim your prize.
+
+Finishing the warmup OSINT chal will really help with this chal
+
+The first two characters of the internal of this flag are 'c0', it may not be plaintext Additionally, the flag format may not be standard capitalization. Please be aware
+
+Made By: Thomas```
+
+Finding a Github account is even easier because all we need to do is  search for "Isabelle," click on Users button, and then sort by "Most  Recently Joined." We see that she's one of the accounts created most  recently. One of the most popular places to hide secrets in Github is in past commits, so we go looking there and we an interesting base64  encoded value in [this commit.](https://github.com/IsabelleOnSecurity/mimidogz/commit/89f4f78390a1a31d08643ba16cba50dc9fcd5ecb) We decode the base64 and see that the flag is `uiuctf{c0mM1t_to_your_dr3@m5!}`
+
+{:refdef: style="text-align: center;"}
+![github user seach sorted by most recently created](https://i.imgur.com/D04KJqm.png){: .imgCenter}
+{: refdef}
+
+----------------
+
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
+
+----------------
+
+## Isabelle's Bad Opsec 2 {#isabelles-bad-opsec-2}
+{: style="text-align: center"}
+#### Category: OSINT | Solves: 81 | Points: 40
+{: style="text-align: center"}
+
+----------------
+
+```Wow holy heck Isabelle's OPSEC is really bad. She was trying to make a custom youtube api but it didnt work. Can you find her channel??
+
+Finishing Isabelle's Opsec 1 will may you with this challenge
+
+The first two characters of the internal of this flag are 'l3', it may not be plaintext Additionally, the flag format may not be standard capitalization. Please be aware
+
+Made By: Thomas```
+
+The challenge text suggests that the next secret is in the other repository, so we go over there to sort through past commits once again.  We run across the channel id in [this commit](https://github.com/IsabelleOnSecurity/api-stuff/commit/115438b1b04324c931329e5a5296c54ed310db17) and now we get to switch focus to hunting around on YouTube. The flag ends up being in the URL of the "My website" link on the  EliteHackerIsabelle1337 YouTube page.
+
+{:refdef: style="text-align: center;"}
+![past github commit that shows isabelle's channel url](https://i.imgur.com/NZXlzdG.png){: .imgCenter}
+{: refdef}
+
+----------------
+
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
+
+----------------
+
+## Isabelle's Bad Opsec 3 {#isabelles-bad-opsec-3}
+{: style="text-align: center"}
+#### Category: OSINT | Solves: 28 | Points: 80
+{: style="text-align: center"}
+
+----------------
+
+```
+
+Isabelle has a youtube video somewhere, something is hidden in it.
+
+Solving Previous OSINT Chals will help you with this challenge
+
+The first two characters of the internal of this flag are 'w3', it may not be plaintext. Additionally, the flag format may not be standard capitalization. Please be aware
+
+Made By: Thomas```
+
+This challenge leaves you with very few clues other than it's "it's  in the video," which could mean just about anything. After doing some  analysis on the audio and video, and nothing immediately pops out. We  realize that for the low point total, we're probably overthinking it.  The challenge is only really solved by exhaustively clicking on all the  buttons. We find the flag by clicking the "Add Translation" button.
+
+{:refdef: style="text-align: center;"}
+![the page for adding translations on youtube](https://i.imgur.com/FDTPKNY.png){: .imgCenter}
+{: refdef}
+
+----------------
+
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
+
+----------------
+
+## Isabelle's Bad Opsec 4 {#isabelles-bad-opsec-4}
+{: style="text-align: center"}
+#### Category: OSINT | Solves: 21 | Points: 100
+{: style="text-align: center"}
+
+----------------
+
+```Isabelle hid one more secret somewhere on her youtube channel! Can you find it!?
+
+Finishing previous OSINT Chals will assist you with this challenge
+
+The first two characters of the internal of this flag are 'th', it may not be plaintext
+
+Additionally, the flag format may not be standard capitalization. Please be aware
+
+Made By: Thomas [Authors Note] I love this chal because I used it IRL to find out who someone cyberbullying a friend was. It's real OSINT -Thomas```
+
+
+This is more of the same, except now the flag is just hidden  somewhere "in the channel." Instead of sifting through browser traffic  to find all the assets unique to the channel, we use the top Google  result for ["YouTube OSINT Tool"](https://mattw.io/youtube-metadata/) and start sifting through the results we get back.  The flag turns out to be hidden in the profile's banner image, which is cropped differently for different platforms (desktop, mobile, smart TV, etc.) 
+
+{:refdef: style="text-align: center;"}
+![list of URLs to alternate banners](https://i.imgur.com/bv2sjWp.png){: .imgCenter}
+{: refdef}
+
+{:refdef: style="text-align: center;"}
+![alternate banner that shows the flag](https://i.imgur.com/lIUs3ES.png){: .imgCenter}
+{: refdef}
+
+----------------
+
+{:refdef: style="text-align: center;"}
+[--- Back to Top ---](#intro)
+{: refdef}
+
+----------------
+
+## Isabelle's Bad Opsec 5 {#isabelles-bad-opsec-5}
+{: style="text-align: center"}
+#### Category: OSINT | Solves: 32 | Points: 100
+{: style="text-align: center"}
+
+----------------
+
+```Isabelle had one more secret on her youtube account, but it was embarrassing.
+
+Finishing previous OSINT Chals will assist you with this challenge
+
+The first two characters of the internal of this flag are 'hi', it may not be plaintext
+
+The flag capitalization may be different, please be aware```
+
+A challenge that mentions something that used to be on a website that isn't anymore... sounds like a job for the Wayback Machine. Sure enough, we try all of the pages and find that the URL for "My website" used to be a different flag.
 
 ----------------
 
