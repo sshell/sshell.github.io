@@ -17,11 +17,9 @@ categories: ctf
 |[Isabelle's Bad Opsec 4](#isabelles-bad-opsec-4) | OSINT | 21 | 100 |
 |[Isabelle's Bad Opsec 5](#isabelles-bad-opsec-5) | OSINT | 32 | 100 |
 
-Date : Thu, 16 July 2020, 23:00 PDT — Sat, 18 July 2020, 23:00 PDT 
-
-Teams with Points : 387  
-
-Notes : First blood on Starter OSINT, Isabelle's Bad Opsec 1, & Isabelle's Bad Opsec 2
+`Date : Thu, 16 July 2020, 23:00 PDT — Sat, 18 July 2020, 23:00 PDT `
+`Teams with Points : 387  `
+`Notes : First blood on Starter OSINT, Isabelle's Bad Opsec 1, & Isabelle's Bad Opsec 2`
 
 ----------------
 
@@ -164,7 +162,8 @@ Here's what all the data looks like when we're all done:
 
 ----------------
 
-```Our friend isabelle has recently gotten into cybersecurity, she made a point of it by rampantly tweeting about it. Maybe you can find some useful information ;).
+```
+Our friend isabelle has recently gotten into cybersecurity, she made a point of it by rampantly tweeting about it. Maybe you can find some useful information ;).
 
 While you may not need it, IsabelleBot has information that applies to this challenge.
 
@@ -172,7 +171,8 @@ Finishing the warmup OSINT chal will really help with all the other osint chals
 
 The first two characters of the internal of this flag are 'g0', it may not be plaintext
 
-Made By: Thomas (I like OSINT)```
+Made By: Thomas (I like OSINT)
+```
 
 We're looking for an account that has been active recently and is  named/has something to do with the character Isabelle. A quick Twitter  search for `"Isabelle"+"Security" `or `"Isabelle"+"Hack"` sorted by "Latest" will lead you to the user "epichackerisabelle" / [@hackerisabelle](https://twitter.com/hackerisabelle) after a small bit of scrolling. We make sure to click the "Tweets & Replies" button up top so that we see ALL of her tweets, and after a  bit of scrolling, we find the flag.
 
@@ -195,13 +195,15 @@ We're looking for an account that has been active recently and is  named/has som
 
 ----------------
 
-```Isabelle has some really bad opsec! She left some code up on a repo that definitely shouldnt be public. Find the naughty code and claim your prize.
+```
+Isabelle has some really bad opsec! She left some code up on a repo that definitely shouldnt be public. Find the naughty code and claim your prize.
 
 Finishing the warmup OSINT chal will really help with this chal
 
 The first two characters of the internal of this flag are 'c0', it may not be plaintext Additionally, the flag format may not be standard capitalization. Please be aware
 
-Made By: Thomas```
+Made By: Thomas
+```
 
 Finding a Github account is even easier because all we need to do is  search for "Isabelle," click on Users button, and then sort by "Most  Recently Joined." We see that she's one of the accounts created most  recently. One of the most popular places to hide secrets in Github is in past commits, so we go looking there and we an interesting base64  encoded value in [this commit.](https://github.com/IsabelleOnSecurity/mimidogz/commit/89f4f78390a1a31d08643ba16cba50dc9fcd5ecb) We decode the base64 and see that the flag is `uiuctf{c0mM1t_to_your_dr3@m5!}`
 
@@ -224,13 +226,15 @@ Finding a Github account is even easier because all we need to do is  search for
 
 ----------------
 
-```Wow holy heck Isabelle's OPSEC is really bad. She was trying to make a custom youtube api but it didnt work. Can you find her channel??
+```
+Wow holy heck Isabelle's OPSEC is really bad. She was trying to make a custom youtube api but it didnt work. Can you find her channel??
 
 Finishing Isabelle's Opsec 1 will may you with this challenge
 
 The first two characters of the internal of this flag are 'l3', it may not be plaintext Additionally, the flag format may not be standard capitalization. Please be aware
 
-Made By: Thomas```
+Made By: Thomas
+```
 
 The challenge text suggests that the next secret is in the other repository, so we go over there to sort through past commits once again.  We run across the channel id in [this commit](https://github.com/IsabelleOnSecurity/api-stuff/commit/115438b1b04324c931329e5a5296c54ed310db17) and now we get to switch focus to hunting around on YouTube. The flag ends up being in the URL of the "My website" link on the  EliteHackerIsabelle1337 YouTube page.
 
@@ -261,7 +265,8 @@ Solving Previous OSINT Chals will help you with this challenge
 
 The first two characters of the internal of this flag are 'w3', it may not be plaintext. Additionally, the flag format may not be standard capitalization. Please be aware
 
-Made By: Thomas```
+Made By: Thomas
+```
 
 This challenge leaves you with very few clues other than it's "it's  in the video," which could mean just about anything. After doing some  analysis on the audio and video, and nothing immediately pops out. We  realize that for the low point total, we're probably overthinking it.  The challenge is only really solved by exhaustively clicking on all the  buttons. We find the flag by clicking the "Add Translation" button.
 
@@ -284,7 +289,8 @@ This challenge leaves you with very few clues other than it's "it's  in the vide
 
 ----------------
 
-```Isabelle hid one more secret somewhere on her youtube channel! Can you find it!?
+```
+Isabelle hid one more secret somewhere on her youtube channel! Can you find it!?
 
 Finishing previous OSINT Chals will assist you with this challenge
 
@@ -292,7 +298,8 @@ The first two characters of the internal of this flag are 'th', it may not be pl
 
 Additionally, the flag format may not be standard capitalization. Please be aware
 
-Made By: Thomas [Authors Note] I love this chal because I used it IRL to find out who someone cyberbullying a friend was. It's real OSINT -Thomas```
+Made By: Thomas [Authors Note] I love this chal because I used it IRL to find out who someone cyberbullying a friend was. It's real OSINT -Thomas
+```
 
 
 This is more of the same, except now the flag is just hidden  somewhere "in the channel." Instead of sifting through browser traffic  to find all the assets unique to the channel, we use the top Google  result for ["YouTube OSINT Tool"](https://mattw.io/youtube-metadata/) and start sifting through the results we get back.  The flag turns out to be hidden in the profile's banner image, which is cropped differently for different platforms (desktop, mobile, smart TV, etc.) 
@@ -320,13 +327,15 @@ This is more of the same, except now the flag is just hidden  somewhere "in the 
 
 ----------------
 
-```Isabelle had one more secret on her youtube account, but it was embarrassing.
+```
+Isabelle had one more secret on her youtube account, but it was embarrassing.
 
 Finishing previous OSINT Chals will assist you with this challenge
 
 The first two characters of the internal of this flag are 'hi', it may not be plaintext
 
-The flag capitalization may be different, please be aware```
+The flag capitalization may be different, please be aware
+```
 
 A challenge that mentions something that used to be on a website that isn't anymore... sounds like a job for the Wayback Machine. Sure enough, we try all of the pages and find that the URL for "My website" used to be a different flag.
 
