@@ -17,9 +17,11 @@ categories: ctf
 |[Isabelle's Bad Opsec 4](#isabelles-bad-opsec-4) | OSINT | 21 | 100 |
 |[Isabelle's Bad Opsec 5](#isabelles-bad-opsec-5) | OSINT | 32 | 100 |
 
-`Date : Thu, 16 July 2020, 23:00 PDT — Sat, 18 July 2020, 23:00 PDT `
-`Teams with Points : 387  `
-`Notes : First blood on Starter OSINT, Isabelle's Bad Opsec 1, & Isabelle's Bad Opsec 2`
+`Date : Thu, 16 July 2020, 23:00 PDT — Sat, 18 July 2020, 23:00 PDT`
+
+`Teams with Points : 387 `
+
+`Notes : First blood on Starter OSINT, Isabelle's Bad Opsec 1 & 2`
 
 ----------------
 
