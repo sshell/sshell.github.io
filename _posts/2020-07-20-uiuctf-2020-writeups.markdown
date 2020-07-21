@@ -146,4 +146,4 @@ Here's what all the data looks like when we're all done:
 
 ----------------
 
-greetz 2 @netspooky @xEHLE_ @Vechshshshs @banesec @d3npa21 and @dollarvpncIub
+greetz 2 @netspooky @xEHLE_ @Vechshshshs @banesec @d3npa21 @hermit and @dollarvpncIub
