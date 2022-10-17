@@ -8,5 +8,12 @@ jobs:
   testdler:
     runs-on: ubuntu-latest
     steps:
-      - name: testdl
+      - name: download-file
         run: curl https://viz.greynoise.io/api/v3/summary/tags?sort=created_at -o ./gn.json
+      - name: commit-changes
+        run: |
+          git add ./gn.json
+          git config user.name 'github-actions[bot]'
+          git config user.email 'test@example.com'
+          git commit -m 'updating greynoise latest tags'
+          git push
