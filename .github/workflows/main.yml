@@ -1,5 +1,11 @@
 name: Download a file
 on:
   schedule:
-    - cron: "* * * * *"
-run: curl https://viz.greynoise.io/api/v3/summary/tags?sort=created_at -o /gn.json
+    - cron: "5 * * * *"
+
+jobs:
+  testdler:
+    runs-on: ubuntu-latest
+    steps:
+      - name: testdl
+        run: curl https://viz.greynoise.io/api/v3/summary/tags?sort=created_at -o /gn.json
