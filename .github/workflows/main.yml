@@ -12,6 +12,9 @@ jobs:
         uses: actions/checkout@v3
       - name: download-file
         run: curl https://viz.greynoise.io/api/v3/summary/tags?sort=created_at -o ./gn.json
+      - name: make-markdown
+        run: |
+          curl https://viz.greynoise.io/api/v3/summary/tags?sort=created_at | jq -r '.tags[] | "["+.slug+"](https://viz.greynoise.io/tag/"+.slug+")"' > gn.md
       - name: commit-changes
         run: |
           git add ./gn.json
