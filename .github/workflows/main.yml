@@ -1,0 +1,5 @@
+name: Download a file
+on:
+  schedule:
+    - cron: "* * * * *"
+run: curl https://viz.greynoise.io/api/v3/summary/tags?sort=created_at -o /gn.json
