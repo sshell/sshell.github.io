@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: testdl
-        run: curl https://viz.greynoise.io/api/v3/summary/tags?sort=created_at -o /gn.json
+        run: curl https://viz.greynoise.io/api/v3/summary/tags?sort=created_at -o ./gn.json
