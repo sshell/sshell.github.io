@@ -8,6 +8,8 @@ jobs:
   testdler:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v3
       - name: download-file
         run: curl https://viz.greynoise.io/api/v3/summary/tags?sort=created_at -o ./gn.json
       - name: commit-changes
