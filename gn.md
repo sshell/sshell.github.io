@@ -1,3 +1,5 @@
+[cpanel-crawler](https://viz.greynoise.io/tag/cpanel-crawler)
+
 [exchange-proxynotshell-vuln-attempt](https://viz.greynoise.io/tag/exchange-proxynotshell-vuln-attempt)
 
 [ncsc-uk](https://viz.greynoise.io/tag/ncsc-uk)
@@ -15,6 +17,4 @@
 [lansweeper-sql-injection-attempt](https://viz.greynoise.io/tag/lansweeper-sql-injection-attempt)
 
 [vmware-nsx-manager-xstream-rce-attempt](https://viz.greynoise.io/tag/vmware-nsx-manager-xstream-rce-attempt)
-
-[zmanda-management-console-administrator-login-bruteforce-attempt](https://viz.greynoise.io/tag/zmanda-management-console-administrator-login-bruteforce-attempt)
 
