@@ -1,8 +1,8 @@
 [bufferover-run](https://viz.greynoise.io/tag/bufferover-run)
 
-[ami-megarac-bmc-redfish-api-rce-attempt](https://viz.greynoise.io/tag/ami-megarac-bmc-redfish-api-rce-attempt)
-
 [ami-megarac-bmc-redfish-api-user-enumeration-attempt](https://viz.greynoise.io/tag/ami-megarac-bmc-redfish-api-user-enumeration-attempt)
+
+[ami-megarac-bmc-redfish-api-rce-attempt](https://viz.greynoise.io/tag/ami-megarac-bmc-redfish-api-rce-attempt)
 
 [cpanel-crawler](https://viz.greynoise.io/tag/cpanel-crawler)
 
