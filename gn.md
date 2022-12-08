@@ -1,8 +1,10 @@
+[wordpress-wp-query-sql-injection](https://viz.greynoise.io/tag/wordpress-wp-query-sql-injection)
+
 [bufferover-run](https://viz.greynoise.io/tag/bufferover-run)
 
-[ami-megarac-bmc-redfish-api-user-enumeration-attempt](https://viz.greynoise.io/tag/ami-megarac-bmc-redfish-api-user-enumeration-attempt)
-
 [ami-megarac-bmc-redfish-api-rce-attempt](https://viz.greynoise.io/tag/ami-megarac-bmc-redfish-api-rce-attempt)
+
+[ami-megarac-bmc-redfish-api-user-enumeration-attempt](https://viz.greynoise.io/tag/ami-megarac-bmc-redfish-api-user-enumeration-attempt)
 
 [cpanel-crawler](https://viz.greynoise.io/tag/cpanel-crawler)
 
@@ -15,6 +17,4 @@
 [fortifydata](https://viz.greynoise.io/tag/fortifydata)
 
 [f5-big-ip-icontrol-cve-2022-41622-csrf](https://viz.greynoise.io/tag/f5-big-ip-icontrol-cve-2022-41622-csrf)
-
-[donetnuke-ssrf-attempt](https://viz.greynoise.io/tag/donetnuke-ssrf-attempt)
 
