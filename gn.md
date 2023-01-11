@@ -1,3 +1,5 @@
+[tibco-jasperreports-path-traversal-attempt](https://viz.greynoise.io/tag/tibco-jasperreports-path-traversal-attempt)
+
 [lexmark-mc3224adwe-rce-attempt](https://viz.greynoise.io/tag/lexmark-mc3224adwe-rce-attempt)
 
 [centos-web-panel-rce-cve-2022-44877-attempt](https://viz.greynoise.io/tag/centos-web-panel-rce-cve-2022-44877-attempt)
@@ -12,9 +14,7 @@
 
 [zyxel-zhttp-lan-rce-attempt](https://viz.greynoise.io/tag/zyxel-zhttp-lan-rce-attempt)
 
-[grafana-api-jsonrpc-php-zabbix-credentials-disclosure-attempt](https://viz.greynoise.io/tag/grafana-api-jsonrpc-php-zabbix-credentials-disclosure-attempt)
-
 [zzzcms-zzzphp-rce-attempt](https://viz.greynoise.io/tag/zzzcms-zzzphp-rce-attempt)
 
-[sonarqube-credentials-leak-attempt](https://viz.greynoise.io/tag/sonarqube-credentials-leak-attempt)
+[wso2-api-manager-xxe-attempt](https://viz.greynoise.io/tag/wso2-api-manager-xxe-attempt)
 
