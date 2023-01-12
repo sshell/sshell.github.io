@@ -1,3 +1,5 @@
+[c-data-unauthorized-web-management-rce](https://viz.greynoise.io/tag/c-data-unauthorized-web-management-rce)
+
 [lexmark-mc3224adwe-rce-attempt](https://viz.greynoise.io/tag/lexmark-mc3224adwe-rce-attempt)
 
 [tibco-jasperreports-path-traversal-attempt](https://viz.greynoise.io/tag/tibco-jasperreports-path-traversal-attempt)
@@ -13,8 +15,6 @@
 [cacti-remote-agent-php-unauthenticated-command-injection-attempt](https://viz.greynoise.io/tag/cacti-remote-agent-php-unauthenticated-command-injection-attempt)
 
 [zyxel-zhttp-lan-rce-attempt](https://viz.greynoise.io/tag/zyxel-zhttp-lan-rce-attempt)
-
-[cisco-sd-wan-vmanage-lfi-attempt](https://viz.greynoise.io/tag/cisco-sd-wan-vmanage-lfi-attempt)
 
 [sonarqube-credentials-leak-attempt](https://viz.greynoise.io/tag/sonarqube-credentials-leak-attempt)
 
