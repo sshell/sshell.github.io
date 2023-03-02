@@ -4,6 +4,8 @@
 
 [fortinac-rce-attempt](https://viz.greynoise.io/tag/fortinac-rce-attempt)
 
+[oracle-web-applications-integrator-rce-attempt](https://viz.greynoise.io/tag/oracle-web-applications-integrator-rce-attempt)
+
 [veeam-backup-and-replication-rce-check](https://viz.greynoise.io/tag/veeam-backup-and-replication-rce-check)
 
 [goanywhere-mft-command-injection-attempt](https://viz.greynoise.io/tag/goanywhere-mft-command-injection-attempt)
@@ -15,6 +17,4 @@
 [exchange-memory-corruption-rce-attempt](https://viz.greynoise.io/tag/exchange-memory-corruption-rce-attempt)
 
 [ibm-aspera-faspex-rce-attempt](https://viz.greynoise.io/tag/ibm-aspera-faspex-rce-attempt)
-
-[laravel-filemanager-lfi-attempt](https://viz.greynoise.io/tag/laravel-filemanager-lfi-attempt)
 
