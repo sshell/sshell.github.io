@@ -1,3 +1,5 @@
+[smartptt-scada-authenticated-rce-attempt](https://viz.greynoise.io/tag/smartptt-scada-authenticated-rce-attempt)
+
 [vbulletin-remote-command-execution-cve-2023-25135-attempt](https://viz.greynoise.io/tag/vbulletin-remote-command-execution-cve-2023-25135-attempt)
 
 [zoho-manageengine-authenticated-rce-attempt](https://viz.greynoise.io/tag/zoho-manageengine-authenticated-rce-attempt)
@@ -15,6 +17,4 @@
 [adobe-coldfusion-rce-cve-2023-26359-attempt](https://viz.greynoise.io/tag/adobe-coldfusion-rce-cve-2023-26359-attempt)
 
 [netwatch](https://viz.greynoise.io/tag/netwatch)
-
-[dataforseo-link-bot](https://viz.greynoise.io/tag/dataforseo-link-bot)
 
