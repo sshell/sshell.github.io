@@ -1,6 +1,6 @@
-[smartptt-scada-authenticated-rce-attempt](https://viz.greynoise.io/tag/smartptt-scada-authenticated-rce-attempt)
-
 [vbulletin-remote-command-execution-cve-2023-25135-attempt](https://viz.greynoise.io/tag/vbulletin-remote-command-execution-cve-2023-25135-attempt)
+
+[smartptt-scada-authenticated-rce-attempt](https://viz.greynoise.io/tag/smartptt-scada-authenticated-rce-attempt)
 
 [zoho-manageengine-authenticated-rce-attempt](https://viz.greynoise.io/tag/zoho-manageengine-authenticated-rce-attempt)
 
