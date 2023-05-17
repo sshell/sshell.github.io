@@ -1,6 +1,6 @@
-[ruckus-wireless-admin-rce-attempt](https://viz.greynoise.io/tag/ruckus-wireless-admin-rce-attempt)
-
 [malware-patrol](https://viz.greynoise.io/tag/malware-patrol)
+
+[ruckus-wireless-admin-rce-attempt](https://viz.greynoise.io/tag/ruckus-wireless-admin-rce-attempt)
 
 [apache-solr-admin-panel-rce-attempt](https://viz.greynoise.io/tag/apache-solr-admin-panel-rce-attempt)
 
