@@ -1,10 +1,12 @@
-[zyxel-rce-attempt](https://viz.greynoise.io/tag/zyxel-rce-attempt)
+[oracle-glassfish-directory-traversal-attempt](https://viz.greynoise.io/tag/oracle-glassfish-directory-traversal-attempt)
 
-[dcbi-netlog-lab-rce-attempt](https://viz.greynoise.io/tag/dcbi-netlog-lab-rce-attempt)
+[zyxel-rce-attempt](https://viz.greynoise.io/tag/zyxel-rce-attempt)
 
 [tenda-rce-attempt](https://viz.greynoise.io/tag/tenda-rce-attempt)
 
 [lb-link-rce-attempt](https://viz.greynoise.io/tag/lb-link-rce-attempt)
+
+[dcbi-netlog-lab-rce-attempt](https://viz.greynoise.io/tag/dcbi-netlog-lab-rce-attempt)
 
 [roxy-wi-rce-attempt](https://viz.greynoise.io/tag/roxy-wi-rce-attempt)
 
@@ -15,6 +17,4 @@
 [sophos-mobile-xxe-attempt](https://viz.greynoise.io/tag/sophos-mobile-xxe-attempt)
 
 [wordpress-advanced-custom-fields-xss-attempt](https://viz.greynoise.io/tag/wordpress-advanced-custom-fields-xss-attempt)
-
-[malware-patrol](https://viz.greynoise.io/tag/malware-patrol)
 
