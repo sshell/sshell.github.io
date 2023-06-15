@@ -10,9 +10,9 @@
 
 [telerik-reporting-xss-attempt](https://viz.greynoise.io/tag/telerik-reporting-xss-attempt)
 
-[geoserver-sql-injection-check](https://viz.greynoise.io/tag/geoserver-sql-injection-check)
-
 [l9-tcpid-internet-scanning](https://viz.greynoise.io/tag/l9-tcpid-internet-scanning)
+
+[geoserver-sql-injection-check](https://viz.greynoise.io/tag/geoserver-sql-injection-check)
 
 [oracle-glassfish-directory-traversal-attempt](https://viz.greynoise.io/tag/oracle-glassfish-directory-traversal-attempt)
 
