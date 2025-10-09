@@ -12,6 +12,8 @@
   .sub { color:var(--muted); font-size:12px; }
   main { padding:20px; display:grid; gap:16px; grid-template-columns: 1fr; max-width:1200px; margin:0 auto; }
   .bar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .test-buttons { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+  .test-buttons button { width:100%; text-align:left; }
   button, .btn {
     background:#1f2937; color:var(--ink); border:1px solid #374151; padding:8px 12px; border-radius:10px; cursor:pointer;
   }
@@ -51,6 +53,15 @@
           <input id="aggressive" type="checkbox" />
           <span>Aggressive mode (may try harmless exec like “calc”)</span>
         </label>
+      </div>
+      <div class="test-buttons">
+        <button id="btnNode">Run Node Integration Test</button>
+        <button id="btnBridge">Run Context Bridge Test</button>
+        <button id="btnIPC">Run IPC Test</button>
+        <button id="btnWindowOpen">Run window.open Test</button>
+        <button id="btnCORS">Run CORS Test</button>
+        <button id="btnFileImage">Run file:// Image Test</button>
+        <button id="btnCookies">Run Cookies Test</button>
       </div>
     </div>
   </div>
@@ -440,6 +451,26 @@
   });
 
   document.getElementById('clearLog').addEventListener('click', () => { $log.textContent = ""; });
+
+  const individualTests = [
+    { id: 'btnNode', label: 'Node Integration', fn: testNodeIntegration },
+    { id: 'btnBridge', label: 'Context Bridge', fn: testBridgeEnumeration },
+    { id: 'btnIPC', label: 'IPC', fn: testIPC },
+    { id: 'btnWindowOpen', label: 'window.open', fn: testWindowOpen },
+    { id: 'btnCORS', label: 'CORS', fn: testCORS },
+    { id: 'btnFileImage', label: 'file:// Image', fn: testFileImage },
+    { id: 'btnCookies', label: 'Cookies', fn: testCookies }
+  ];
+
+  for (const t of individualTests) {
+    const el = document.getElementById(t.id);
+    if (!el) continue;
+    el.addEventListener('click', async () => {
+      log(`=== Running ${t.label} test ===`);
+      await t.fn();
+      log(`=== Done ${t.label} test ===`);
+    });
+  }
 
 })();
 </script>
