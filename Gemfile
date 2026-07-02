@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem "erb"
 gem "jekyll"
 gem "jekyll-gist"
 gem "jekyll-paginate"
