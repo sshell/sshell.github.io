@@ -6,6 +6,7 @@ _site
 .jekyll-cache
 .bundle
 vendor
+backup
 
 # Numerous always-ignore extensions
 *.diff
